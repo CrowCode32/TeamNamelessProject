@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class gameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+
+    [SerializeField] TMP_Text gameGoalCountText;
 
     public bool isPaused;
 
@@ -20,6 +23,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         timeScaleOrig = Time.timeScale;
+
     }
 
     // Update is called once per frame
@@ -55,5 +59,30 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    // Waiting on enemyAI script
+   /* public void updateGameGoal(int amount)
+    {
+        gameGoalCount += amount;
+
+        gameGoalCount.text = gameGoalCount.ToString("F0");    
+
+        if(gameGoalCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+       
+    }*/
+
+    
+    // Waiting on buttonFunctions script
+    public void youLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
     }
 }
