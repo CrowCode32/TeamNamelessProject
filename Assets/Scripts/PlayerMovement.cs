@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Playeryer : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     // Speed
     [SerializeField] CharacterController controller;
@@ -31,10 +31,6 @@ public class Playeryer : MonoBehaviour
     {
         movement();
         sprint();
-        //moveDir = (Input.GetAxis("Horizontal") * transform.right) +
-        //        (Input.GetAxis("Vertical") * transform.forward);
-
-        //controller.Move(moveDir * speed * Time.deltaTime);
     }
 
     void movement()
@@ -50,14 +46,13 @@ public class Playeryer : MonoBehaviour
         }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
-          (Input.GetAxis("Vertical") * transform.forward);
+                  (Input.GetAxis("Vertical") * transform.forward);
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
         jump();
 
         controller.Move(playerVel * Time.deltaTime);
-
         playerVel.y -= gravity * Time.deltaTime;
     }
 
