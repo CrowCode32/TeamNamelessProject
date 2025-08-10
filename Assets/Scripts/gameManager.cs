@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
 
     [SerializeField] TMP_Text gameGoalCountText;
+
+    public Image playerHPBar;
+    public GameObject playerDmgScreen;
+
+    public GameObject player;
+    public PlayerMovement playerScript;
 
     public bool isPaused;
 
@@ -61,12 +68,12 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    // Waiting on enemyAI script
-   /* public void updateGameGoal(int amount)
+    
+    public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
 
-        gameGoalCount.text = gameGoalCount.ToString("F0");    
+        gameGoalCountText.text = gameGoalCount.ToString("F0");    
 
         if(gameGoalCount <= 0)
         {
@@ -75,10 +82,9 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
        
-    }*/
+    }
 
     
-    // Waiting on buttonFunctions script
     public void youLose()
     {
         statePause();
