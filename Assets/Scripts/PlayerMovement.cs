@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamage
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -19,12 +20,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float shootRte;
     [SerializeField] int shootDist;
 
+    //Health
+    [SerializeField] int Hp;
+
     Vector3 moveDir;
     Vector3 playerVel;
 
     float shootTimer;
 
     int jumpCount;
+    int HpOriginal;
 
     // Used for later on
     bool isSprinting;
@@ -32,7 +37,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HpOriginal = Hp;
 
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
@@ -106,5 +113,30 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
         }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Hp -= amount;
+
+        UpdatePlayerUI();
+        StartCoroutine(flashDmgScreen());
+
+        if(Hp <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
+
+    public void UpdatePlayerUI() 
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
+    }
+
+    IEnumerator flashDmgScreen()
+    {
+        gameManager.instance.playerDmgScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDmgScreen.SetActive(false);
     }
 }
