@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658f240044cd6de408c19515c55e7951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 8
   controller: {fileID: 5954322636712590232}
   speed: 5
   sprintMod: 0
@@ -57,6 +60,7 @@ MonoBehaviour:
   shootDmg: 0
   shootRte: 0
   shootDist: 0
+  Hp: 0
 --- !u!33 &7200116426270024197
 MeshFilter:
   m_ObjectHideFlags: 0
