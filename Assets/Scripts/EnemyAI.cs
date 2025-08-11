@@ -1,64 +1,64 @@
-using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class enemyAI : MonoBehaviour, IDamage
 {
-    [SerializeField] int Hp;
-    [SerializeField] int FaceTargetSpeed;
-
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
-    [SerializeField] GameObject Bullet;
-    [SerializeField] float shootRate;
-    [SerializeField] Transform shootPOS;
+    [SerializeField] int HP;
+    [SerializeField] int faceTargetSpeed;
 
-    Color Originalcolor;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
+    [SerializeField] Transform shootPos;
+
+
+    Color colorOrig;
 
     float shootTimer;
 
+
     bool playerInTrigger;
 
-    Vector3 playerDir;
+    Vector3 playerDirection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Originalcolor = model.material.color;
+        colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         shootTimer += Time.deltaTime;
 
         if (playerInTrigger)
         {
-            playerDir = gameManager.instance.player.transform.position - transform.position;
+            playerDirection = gameManager.instance.player.transform.position - transform.position;
 
             agent.SetDestination(gameManager.instance.player.transform.position);
-
             if (shootTimer >= shootRate)
             {
-                Shoot();
+                shoot();
             }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                FaceTarget();
+                faceTarget();
             }
         }
-    }
 
-    void FaceTarget()
+    }
+    void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(playerDir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * FaceTargetSpeed);
+        Quaternion rot = Quaternion.LookRotation(playerDirection);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -74,30 +74,30 @@ public class EnemyAI : MonoBehaviour, IDamage
             playerInTrigger = false;
         }
     }
-    void Shoot()
+    void shoot()
     {
         shootTimer = 0;
-        Instantiate(Bullet, shootPOS.position, transform.rotation);
+        Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-    public void TakeDamage(int amount)
+    public void takeDamage(int amount)
     {
-        if (Hp > 0)
+
+        if (HP > 0)
         {
-            Hp -= amount;
+            HP -= amount;
             StartCoroutine(flashRed());
         }
-        if (Hp <= 0)
+        if (HP <= 0)
         {
             gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
-
     IEnumerator flashRed()
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Originalcolor;
+        model.material.color = colorOrig;
     }
 }
