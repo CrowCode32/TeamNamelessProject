@@ -7,6 +7,12 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
+    public void respawn()
+    {
+        gameManager.instance.player.transform.position = gameManager.instance.startPos;
+        gameManager.instance.player.transform.rotation = gameManager.instance.startRot;
+        gameManager.instance.stateUnpause();
+    }
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

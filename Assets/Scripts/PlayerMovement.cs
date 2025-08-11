@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDir;
     Vector3 playerVel;
+ 
 
     int jumpCount;
 
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
