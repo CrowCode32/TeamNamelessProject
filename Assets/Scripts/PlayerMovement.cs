@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         HpOriginal = Hp;
 
-        UpdatePlayerUI();
+     /*   UpdatePlayerUI();*/
     }
 
     // Update is called once per frame
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         Hp -= amount;
 
-        UpdatePlayerUI();
+      /*  UpdatePlayerUI();*/
         StartCoroutine(flashDmgScreen());
 
         if(Hp <= 0)
@@ -128,10 +128,10 @@ public class PlayerMovement : MonoBehaviour, IDamage
         }
     }
 
-    public void UpdatePlayerUI() 
+  /*  public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
-    }
+    }*/
 
     IEnumerator flashDmgScreen()
     {
