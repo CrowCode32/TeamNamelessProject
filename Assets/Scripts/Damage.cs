@@ -45,11 +45,17 @@ public class Damage : MonoBehaviour
 
         if (dmg != null && type != DamageType.DOT)
         {
-            dmg.TakeDamage(damageAmount);
+            dmg.takeDamage(damageAmount);
         }
 
         if (type == DamageType.moving || type == DamageType.Homing)
         {
+            Destroy(gameObject);
+        }
+
+        if (type == DamageType.stationary) 
+        {
+            dmg.takeDamage(damageAmount);
             Destroy(gameObject);
         }
     }
@@ -73,7 +79,7 @@ public class Damage : MonoBehaviour
     IEnumerator damageOther(IDamage d)
     {
         isDamaging = true;
-        d.TakeDamage(damageAmount);
+        d.takeDamage(damageAmount);
         yield return new WaitForSeconds(damageRate);
         isDamaging = false;
     }

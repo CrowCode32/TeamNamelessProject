@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     {
         HpOriginal = Hp;
 
-     /*   UpdatePlayerUI();*/
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
@@ -112,26 +112,22 @@ public class PlayerMovement : MonoBehaviour, IDamage
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            if(dmg != null)
+            {
+                dmg.takeDamage(shootDmg);
+            }
         }
     }
 
-    public void TakeDamage(int amount)
-    {
-        Hp -= amount;
+   
 
-      /*  UpdatePlayerUI();*/
-        StartCoroutine(flashDmgScreen());
-
-        if(Hp <= 0)
-        {
-            gameManager.instance.youLose();
-        }
-    }
-
-  /*  public void UpdatePlayerUI() 
+    public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
-    }*/
+    }
 
     IEnumerator flashDmgScreen()
     {
@@ -139,4 +135,19 @@ public class PlayerMovement : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDmgScreen.SetActive(false);
     }
+
+    public void takeDamage(int amount)
+    {
+         
+        Hp -= amount;
+
+        UpdatePlayerUI();
+        StartCoroutine(flashDmgScreen());
+
+        if (Hp <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    
+}
 }
