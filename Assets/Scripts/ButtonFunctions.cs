@@ -9,9 +9,9 @@ public class buttonFunctions : MonoBehaviour
 
     public void respawn()
     {
-        gameManager.instance.player.transform.position = gameManager.instance.startPos;
-        gameManager.instance.player.transform.rotation = gameManager.instance.startRot;
-        gameManager.instance.stateUnpause();
+        //gameManager.instance.player.transform.position = gameManager.instance.;
+        //gameManager.instance.player.transform.rotation = gameManager.instance.startRot;
+        //gameManager.instance.stateUnpause();
     }
     public void restart()
     {
