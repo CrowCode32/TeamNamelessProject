@@ -1,34 +1,45 @@
 using UnityEngine;
+using TeamNameless;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
-    // Movement
+    [Header("Health")]
+    [SerializeField] private int HP = 100;
+
+    [Header("Movement")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float sprintMod = 1.5f;
 
-    // Jumping
+    [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 8f;
     [SerializeField] private int jumpMax = 2;
     [SerializeField] private float gravity = 20f;
+
+    [Header("Shooting")]
+    [SerializeField] private float shootDist = 100f;
+    [SerializeField] private LayerMask ignoreLayer;
+    [SerializeField] private int shootDamage = 10;
 
     private Vector3 moveDir;
     private Vector3 playerVel;
     private int jumpCount;
     private bool isSprinting;
-
-    // Shooting
-    [SerializeField] private float shootDist = 100f;
-    [SerializeField] private LayerMask ignoreLayer;
-    [SerializeField] private int shootDamage;
     private float shootTimer;
+
+    void Start()
+    {
+        if (controller == null)
+            controller = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
         Movement();
         Sprint();
 
-        if (Input.GetButtonDown("Fire1")) Shoot();
+        if (Input.GetButtonDown("Fire1"))
+            Shoot();
     }
 
     void Movement()
@@ -81,11 +92,23 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log(hit.collider.name);
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            TeamNameless.IDamage dmg = hit.collider.GetComponent<TeamNameless.IDamage>();
             if (dmg != null)
             {
                 dmg.TakeDamage(shootDamage);
             }
         }
     }
+
+    public void TakeDamage(int amount)
+    {
+        HP -= amount;
+        Debug.Log($"Player took {amount} damage. Remaining HP: {HP}");
+
+        if (HP <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
+
 }

@@ -1,7 +1,8 @@
 using UnityEngine;
-
-
-public interface IDamage
+namespace TeamNameless
 {
-    void TakeDamage(int amount);
+    public interface IDamage
+    {
+        void TakeDamage(int amount);
+    }
 }
