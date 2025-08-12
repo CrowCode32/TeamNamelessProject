@@ -52,6 +52,12 @@ public class Damage : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (type == DamageType.stationary) 
+        {
+            dmg.takeDamage(damageAmount);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
