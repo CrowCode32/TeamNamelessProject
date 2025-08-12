@@ -2399,19 +2399,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658f240044cd6de408c19515c55e7951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 0
   controller: {fileID: 960068490}
-  HP: 4
   speed: 5
-  jumpSpeed: 5
-  jumpMax: 0
-  gravity: 10
   sprintMod: 2
-  shootDamage: 1
-  shootRate: 5
-  shootDist: 5
+  jumpSpeed: 5
+  JumpMax: 0
+  gravity: 10
 --- !u!4 &960068494
 Transform:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
+
     public static gameManager instance;
 
     [SerializeField] GameObject menuActive;
@@ -12,18 +14,31 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] TMP_Text gameGoalCountText;
 
+    public Image playerHPBar;
+    public GameObject playerDamageScreen;
+
+    public GameObject player;
+    public PlayerMovement playerScript;
+
+    public Vector3 startPos;
+    public Quaternion startRot;
+
     public bool isPaused;
 
     float timeScaleOrig;
 
     int gameGoalCount;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
         timeScaleOrig = Time.timeScale;
 
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<PlayerMovement>();
+
+        startPos = player.transform.position;
+        startRot = player.transform.rotation;
     }
 
     // Update is called once per frame
@@ -31,12 +46,13 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if(menuActive == null)
+            if (menuActive == null)
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
-            } else if(menuActive == menuPause)
+            }
+            else if (menuActive == menuPause)
             {
                 stateUnpause();
             }
@@ -61,24 +77,19 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    // Waiting on enemyAI script
-   /* public void updateGameGoal(int amount)
+    public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
 
-        gameGoalCount.text = gameGoalCount.ToString("F0");    
-
-        if(gameGoalCount <= 0)
+        gameGoalCountText.text = gameGoalCount.ToString("F0");
+        if (gameGoalCount <= 0)
         {
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
-       
-    }*/
+    }
 
-    
-    // Waiting on buttonFunctions script
     public void youLose()
     {
         statePause();
