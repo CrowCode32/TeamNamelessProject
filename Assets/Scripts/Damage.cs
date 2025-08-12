@@ -32,7 +32,7 @@ public class Damage : MonoBehaviour
     {
         if (type == DamageType.Homing)
         {
-            //Rb.linearVelocity = (gameManager.instance.player.transform.position - transform.position).normalized * MoveSpeed * Time.deltaTime;
+            Rb.linearVelocity = (gameManager.instance.player.transform.position - transform.position).normalized * MoveSpeed * Time.deltaTime;
         }
     }
 
@@ -50,6 +50,12 @@ public class Damage : MonoBehaviour
 
         if (type == DamageType.moving || type == DamageType.Homing)
         {
+            Destroy(gameObject);
+        }
+
+        if (type == DamageType.stationary) 
+        {
+            dmg.takeDamage(damageAmount);
             Destroy(gameObject);
         }
     }
