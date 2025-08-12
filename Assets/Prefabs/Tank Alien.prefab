@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4048171659273068673}
-  - component: {fileID: 7918472898665891159}
+  - component: {fileID: 17460111978326403}
   - component: {fileID: 1659175680647834484}
   - component: {fileID: 7303548283995470070}
   - component: {fileID: 5208487315904225640}
@@ -41,7 +41,7 @@ Transform:
   - {fileID: 5066609931261276117}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7918472898665891159
+--- !u!114 &17460111978326403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,14 +50,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2278763753540071751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cf3de2e166fa141867c7e7390f5885, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a54571246641446bfdfcb25c4932c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5208487315904225640}
   agent: {fileID: 1659175680647834484}
   HP: 15
-  faceTargetSpeed: 8
-  bullet: {fileID: 2020913039664651646, guid: f6e2e5901886e2f49bb6db4b7216002f, type: 3}
+  faceTargetSpeed: 600
+  bullet: {fileID: 2287927086601382010, guid: f6e2e5901886e2f49bb6db4b7216002f, type: 3}
   shootRate: 3
   shootPos: {fileID: 5066609931261276117}
 --- !u!195 &1659175680647834484
@@ -177,7 +177,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6614873363917212134
 GameObject:
