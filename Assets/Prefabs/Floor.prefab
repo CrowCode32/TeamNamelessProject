@@ -8,12 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<<< HEAD:Assets/Prefabs/Player.prefab
+  - component: {fileID: 6232979263858119155}
+  - component: {fileID: 1803002721014039637}
+  - component: {fileID: 4445743012459377222}
+  - component: {fileID: 2736762757584868087}
+  - component: {fileID: 7393881924075016805}
+  - component: {fileID: 5951185404240913456}
+  - component: {fileID: 2927233069489966843}
+  m_Layer: 3
+  m_Name: Player
+========
   - component: {fileID: 5707859316253846031}
   - component: {fileID: 6452662693579371349}
   - component: {fileID: 5107803042524062607}
   - component: {fileID: 3948650511798881583}
   m_Layer: 0
   m_Name: Floor
+>>>>>>>> origin/main:Assets/Prefabs/Floor.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +46,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<<< HEAD:Assets/Prefabs/Player.prefab
+--- !u!143 &1803002721014039637
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524855214014118898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4445743012459377222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524855214014118898}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78615f27faa22264ab9cdf77d05c918f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sens: 300
+  lockVertMin: 25
+  lockVertMax: 25
+  invertY: 0
+--- !u!114 &2736762757584868087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524855214014118898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 658f240044cd6de408c19515c55e7951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  controller: {fileID: 1803002721014039637}
+  speed: 5
+  sprintMod: 0
+  jumpSpeed: 5
+  JumpMax: 2
+  gravity: 25
+  shootDmg: 5
+  shootRte: 0.5
+  shootDist: 15
+  Hp: 100
+--- !u!33 &7393881924075016805
+========
 --- !u!33 &6452662693579371349
+>>>>>>>> origin/main:Assets/Prefabs/Floor.prefab
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +187,15 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
+<<<<<<<< HEAD:Assets/Prefabs/Player.prefab
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+========
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+>>>>>>>> origin/main:Assets/Prefabs/Floor.prefab
