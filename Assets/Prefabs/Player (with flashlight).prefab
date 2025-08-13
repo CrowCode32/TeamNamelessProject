@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1371864885155252217}
   - component: {fileID: 1961243260284338023}
   - component: {fileID: 8794064716849116915}
-  - component: {fileID: 9071873316173252395}
+  - component: {fileID: 8724797027568331875}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -139,7 +139,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &9071873316173252395
+--- !u!114 &8724797027568331875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 924602376839775597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78615f27faa22264ab9cdf77d05c918f, type: 3}
+  m_Script: {fileID: 11500000, guid: cdab09b13d6be77449fd3b6a09b81665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sens: 100
@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2554447353957553138}
-  - component: {fileID: 2518520684335312189}
+  - component: {fileID: 3196352994115577016}
   - component: {fileID: 5137643247833060424}
   - component: {fileID: 9197031495264112614}
   - component: {fileID: 2069928826228244167}
@@ -192,7 +192,7 @@ Transform:
   - {fileID: 5655497174087150448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2518520684335312189
+--- !u!114 &3196352994115577016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,15 +201,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3184780831501016979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 658f240044cd6de408c19515c55e7951, type: 3}
+  m_Script: {fileID: 11500000, guid: db16f113d8864084f8caba941abc0687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
   controller: {fileID: 2069928826228244167}
   speed: 5
   sprintMod: 2
   jumpSpeed: 5
   JumpMax: 2
-  gravity: 10
+  gravity: 2
+  shootDmg: 1
+  shootRte: 1
+  shootDist: 15
+  Hp: 20
 --- !u!33 &5137643247833060424
 MeshFilter:
   m_ObjectHideFlags: 0
