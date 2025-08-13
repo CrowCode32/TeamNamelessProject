@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     //Health
     [SerializeField] int Hp;
-
+  
     Vector3 moveDir;
     Vector3 playerVel;
 
@@ -122,9 +122,9 @@ public class PlayerMovement : MonoBehaviour, IDamage
         }
     }
 
-   
 
-    public void UpdatePlayerUI() 
+
+    public void UpdatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -148,6 +148,12 @@ public class PlayerMovement : MonoBehaviour, IDamage
         {
             gameManager.instance.youLose();
         }
-    
 }
+
+//    // Heal
+//    public void Heal(int amount)
+//    {
+//        Hp = Mathf.Max(Hp + amount, HpOriginal);
+//        UpdatePlayerUI();
+//    }
 }
