@@ -553,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6948637089367410501}
-  - component: {fileID: 8882678485535438551}
+  - component: {fileID: 1798749860171447975}
   m_Layer: 5
   m_Name: ButtonFunctions
   m_TagString: Untagged
@@ -580,7 +580,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8882678485535438551
+--- !u!114 &1798749860171447975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264469637963999824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce4a66fb77b63e44bfc1e6835e025f4, type: 3}
+  m_Script: {fileID: 11500000, guid: b161ca387db5c5e4d9d57084eedc51d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2086078524410187374
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -1563,7 +1563,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1
@@ -2040,7 +2040,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: resume
         m_Mode: 1
@@ -2380,7 +2380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6903425658284264731}
-  - component: {fileID: 7473409772551217350}
+  - component: {fileID: 4913134742689025560}
   m_Layer: 5
   m_Name: gameManager
   m_TagString: Untagged
@@ -2407,7 +2407,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7473409772551217350
+--- !u!114 &4913134742689025560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2416,15 +2416,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6794477881710307264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143e83904fad8a44f9d418865f0469bd, type: 3}
+  m_Script: {fileID: 11500000, guid: c8446ac49fd2e6f4bb81747ab11f743b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menuActive: {fileID: 0}
   menuPause: {fileID: 4469888889497384866}
   menuWin: {fileID: 2237499983361661800}
   menuLose: {fileID: 7010829586435111376}
-  gameGoalCountText: {fileID: 2187427665019973235}
-  playerHPBar: {fileID: 4454763653528404710}
+  gameGoalCountText: {fileID: 8311255396346655199}
+  playerHPBar: {fileID: 5210352999845416621}
   playerDmgScreen: {fileID: 8447188251932403832}
   player: {fileID: 0}
   playerScript: {fileID: 0}
@@ -2550,7 +2550,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
@@ -3654,7 +3654,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8882678485535438551}
+      - m_Target: {fileID: 1798749860171447975}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1
