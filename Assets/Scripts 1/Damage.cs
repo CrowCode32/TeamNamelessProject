@@ -55,6 +55,7 @@ public class Damage : MonoBehaviour
 
         if (type == DamageType.stationary) 
         {
+            
             dmg.takeDamage(damageAmount);
             Destroy(gameObject);
         }

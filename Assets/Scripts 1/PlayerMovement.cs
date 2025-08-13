@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
     float shootTimer;
 
     int jumpCount;
-    int HpOriginal;
+    public int HpOriginal;
 
     // Used for later on
     bool isSprinting;
