@@ -75,7 +75,6 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
-
         gameGoalCountText.text = gameGoalCount.ToString("F0");
        
     }
