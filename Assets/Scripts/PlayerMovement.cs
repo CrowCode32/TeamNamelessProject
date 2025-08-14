@@ -150,6 +150,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
         }
 }
 
+    // Started making a heal not realizing someone else had already started
 //    // Heal
 //    public void Heal(int amount)
 //    {
