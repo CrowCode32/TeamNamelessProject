@@ -13,12 +13,9 @@ public class winScript : MonoBehaviour
     {
         
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            gameManager.instance.youWin();
-        }
+        gameManager.instance.youWin();
     }
 }
