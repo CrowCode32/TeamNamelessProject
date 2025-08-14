@@ -191,15 +191,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5627409356916068392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cf3de2e166fa141867c7e7390f5885, type: 3}
+  m_Script: {fileID: 11500000, guid: f07fd5c88b0aca149b4ef04a826a05cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 3827203239076122112}
   agent: {fileID: 235540495150209889}
-  HP: 50
-  faceTargetSpeed: 600
+  HP: 2
+  faceTargetSpeed: 8
   bullet: {fileID: 3419981150564927128, guid: 56fe3f5dd0d9ee045b8506d428ff67a5, type: 3}
-  shootRate: 5
+  shootRate: 1
   shootPos: {fileID: 597721189427934332}
 --- !u!195 &235540495150209889
 NavMeshAgent:
