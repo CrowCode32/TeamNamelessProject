@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRte;
+    [SerializeField] float shootRate;
     [SerializeField] int shootDist;
 
     //Health
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
         {
             shoot();
         }
