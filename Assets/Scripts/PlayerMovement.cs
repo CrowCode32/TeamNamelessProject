@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour, IDamage
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRate;
+    [SerializeField] float shootRte;
     [SerializeField] int shootDist;
 
     //Health
     [SerializeField] int Hp;
-  
+
     Vector3 moveDir;
     Vector3 playerVel;
 
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     int jumpCount;
     int HpOriginal;
+    int CurrentHp;
 
     // Used for later on
     bool isSprinting;
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
         {
             shoot();
         }
@@ -122,9 +123,9 @@ public class PlayerMovement : MonoBehaviour, IDamage
         }
     }
 
+   
 
-
-    public void UpdatePlayerUI()
+    public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -134,6 +135,13 @@ public class PlayerMovement : MonoBehaviour, IDamage
         gameManager.instance.playerDmgScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDmgScreen.SetActive(false);
+    }
+
+    IEnumerator flashHealScreen()
+    {
+        gameManager.instance.playerHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        gameManager.instance.playerHealScreen.SetActive(false);
     }
 
     public void takeDamage(int amount)
@@ -148,12 +156,24 @@ public class PlayerMovement : MonoBehaviour, IDamage
         {
             gameManager.instance.youLose();
         }
+    
 }
 
-//    // Heal
-//    public void Heal(int amount)
-//    {
-//        Hp = Mathf.Max(Hp + amount, HpOriginal);
-//        UpdatePlayerUI();
-//    }
+    public void heal(int amount)
+    {
+        Hp += amount;
+
+        UpdatePlayerUI();
+        StartCoroutine(flashHealScreen());
+        StopHeal(HpOriginal);
+
+    }
+
+    public void StopHeal(int HpOriginal)
+    {
+       if (CurrentHp <= HpOriginal)
+        {
+            CurrentHp = Hp;
+        }
+    }
 }
