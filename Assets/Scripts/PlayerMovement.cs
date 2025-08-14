@@ -137,6 +137,13 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         gameManager.instance.playerDmgScreen.SetActive(false);
     }
 
+    IEnumerator flashHealScreen()
+    {
+        gameManager.instance.playerHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        gameManager.instance.playerHealScreen.SetActive(false);
+    }
+
     public void takeDamage(int amount)
     {
          
@@ -157,7 +164,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         Hp += amount;
 
         UpdatePlayerUI();
-
+        StartCoroutine(flashHealScreen());
         StopHeal(HpOriginal);
 
     }

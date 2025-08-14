@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
 
     public Image playerHPBar;
     public GameObject playerDmgScreen;
+    public GameObject playerHealScreen;
 
     public GameObject player;
     public PlayerMovement playerScript;
