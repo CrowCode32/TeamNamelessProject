@@ -11,9 +11,15 @@ TagManager:
   - Player
   - Water
   - UI
+<<<<<<< HEAD
   - Player Bullet
   - Enemy
   - Enemy Bullet
+=======
+  - Enemy
+  - Bullet
+  - 
+>>>>>>> aeaf91e4e61bb1040bf695f869a02bff3901d867
   - 
   - 
   - 
