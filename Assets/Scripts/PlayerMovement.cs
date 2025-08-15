@@ -131,9 +131,9 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     IEnumerator flashDmgScreen()
     {
-        gameManager.instance.playerDmgScreen.SetActive(true);
+        gameManager.instance.playerDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.playerDmgScreen.SetActive(false);
+        gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
     public void takeDamage(int amount)
