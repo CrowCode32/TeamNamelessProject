@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour, IDamage
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour, IDamage
 
     int jumpCount;
     int HpOriginal;
+    int CurrentHp;
 
     // Used for later on
     bool isSprinting;
@@ -136,6 +137,13 @@ public class PlayerMovement : MonoBehaviour, IDamage
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
+    IEnumerator flashHealScreen()
+    {
+        gameManager.instance.playerHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        gameManager.instance.playerHealScreen.SetActive(false);
+    }
+
     public void takeDamage(int amount)
     {
          
@@ -150,4 +158,22 @@ public class PlayerMovement : MonoBehaviour, IDamage
         }
     
 }
+
+    public void heal(int amount)
+    {
+        Hp += amount;
+
+        UpdatePlayerUI();
+        StartCoroutine(flashHealScreen());
+        StopHeal(HpOriginal);
+
+    }
+
+    public void StopHeal(int HpOriginal)
+    {
+       if (CurrentHp <= HpOriginal)
+        {
+            CurrentHp = Hp;
+        }
+    }
 }

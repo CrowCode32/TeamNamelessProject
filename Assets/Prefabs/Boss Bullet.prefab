@@ -44,15 +44,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3419981150564927128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317ddf0c810928c4ba896fa510c4bec8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5091771d8fae22645967270164e1cde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   Rb: {fileID: 7446473164821203732}
   damageAmount: 5
   damageRate: 0
-  MoveSpeed: 75
-  destroyTime: 5
+  MoveSpeed: 17
+  destroyTime: 3
 --- !u!135 &1286749010196777673
 SphereCollider:
   m_ObjectHideFlags: 0
