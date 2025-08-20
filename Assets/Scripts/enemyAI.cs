@@ -19,8 +19,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
  
-
-
     Color colorOrig;
 
     float shootTimer;
@@ -153,6 +151,9 @@ public class enemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+
+        anim.SetTrigger("Shoot");
+        
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
