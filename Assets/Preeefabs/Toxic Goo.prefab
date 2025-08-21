@@ -45,13 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8143047928390349747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317ddf0c810928c4ba896fa510c4bec8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5091771d8fae22645967270164e1cde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  Rb: {fileID: 0}
-  damageAmount: 1
-  damageRate: 0.5
+  Rb: {fileID: 8064674594200519052}
+  damageAmount: 5
+  damageRate: 2
   MoveSpeed: 0
   destroyTime: 0
 --- !u!33 &1108198986308774728

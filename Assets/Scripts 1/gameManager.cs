@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
 
     public Image playerHPBar;
     public GameObject playerDmgScreen;
+    public GameObject playerHealScreen;
 
     public GameObject player;
     public PlayerMovement playerScript;
@@ -74,19 +75,17 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         gameGoalCount += amount;
-
-        gameGoalCountText.text = gameGoalCount.ToString("F0");    
-
-        if(gameGoalCount <= 0)
-        {
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
+        gameGoalCountText.text = gameGoalCount.ToString("F0");
        
     }
-
     
+    public void youWin()
+    {
+        statePause();
+        menuActive = menuWin;
+        menuActive.SetActive(true);
+    }
+
     public void youLose()
     {
         statePause();
