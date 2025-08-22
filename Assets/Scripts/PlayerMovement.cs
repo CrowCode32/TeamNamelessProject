@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 {
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     // Used for later on
     bool isSprinting;
+    private int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -195,6 +197,13 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
             gunListPos--;
             changeGun();
         }
+    }
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        changeGun();
     }
 
     public void heal(int amount)
