@@ -191,16 +191,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6037966723148322078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f07fd5c88b0aca149b4ef04a826a05cc, type: 3}
+  m_Script: {fileID: 11500000, guid: ba997fbf2f176c14093412115dc54737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 7832011985919828782}
   agent: {fileID: 3262102834452398454}
   HP: 2
   faceTargetSpeed: 8
-  FOV: 90
-  roamDistance: 15
-  roamPauseTime: 3
   bullet: {fileID: 2020913039664651646, guid: 17293044a3bbce647bb15681e4dcd6fc, type: 3}
   shootRate: 1
   shootPos: {fileID: 2983184761104698839}

@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4374025832617672628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b161ca387db5c5e4d9d57084eedc51d9, type: 3}
+  m_Script: {fileID: 11500000, guid: f6af4f93bd8f73547b68a7d6cac80397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4388904116472039002
@@ -3387,6 +3387,7 @@ MonoBehaviour:
   menuPause: {fileID: 4034436230123524680}
   menuWin: {fileID: 7374126202276842335}
   menuLose: {fileID: 2333595757264181992}
+  menuControls: {fileID: 0}
   gameGoalCountText: {fileID: 5111931583924379093}
   playerHPBar: {fileID: 7496468257404593086}
   playerDmgScreen: {fileID: 6953147596270253673}

@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuControls;
 
     [SerializeField] TMP_Text gameGoalCountText;
 
@@ -34,6 +35,10 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerMovement>();
+
+        statePause();
+        menuActive = menuControls;
+        menuActive.SetActive(true);
     }
 
     // Update is called once per frame
@@ -46,7 +51,7 @@ public class gameManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
-            } else if(menuActive == menuPause)
+            } else if(menuActive == menuPause || menuActive == menuControls)
             {
                 stateUnpause();
             }
