@@ -1,7 +1,6 @@
 using UnityEngine;
 using TeamNameless;
-
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage,
 {
     [Header("Health")]
     [SerializeField] private int HP = 100;

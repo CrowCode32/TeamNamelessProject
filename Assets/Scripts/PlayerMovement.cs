@@ -199,6 +199,14 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         }
     }
 
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        changeGun();
+    }
+
     public void heal(int amount)
     {
         Hp += amount;

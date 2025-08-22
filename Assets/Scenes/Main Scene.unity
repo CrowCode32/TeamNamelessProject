@@ -8478,6 +8478,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884329100}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &890830289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3184780831501016979, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
+  m_PrefabInstance: {fileID: 1866864372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &890830291 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 2069928826228244167, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
+  m_PrefabInstance: {fileID: 1866864372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &890830296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890830289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfccca9aaa1b42f45ae3af5290147e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  controller: {fileID: 890830291}
+  speed: 5
+  sprintMod: 0
+  jumpSpeed: 0
+  JumpMax: 0
+  gravity: 30
+  shootDmg: 0
+  shootRate: 0
+  shootDistance: 0
+  Hp: 40
+  gunModel: {fileID: 0}
+  gunList: []
 --- !u!1001 &894301881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12791,11 +12828,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1862467804}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &1290317927
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1295092088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18162,10 +18207,14 @@ PrefabInstance:
       propertyPath: shootRte
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2518520684335312189, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3184780831501016979, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 890830296}
   m_SourcePrefab: {fileID: 100100000, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
 --- !u!4 &1876954580 stripped
 Transform:
