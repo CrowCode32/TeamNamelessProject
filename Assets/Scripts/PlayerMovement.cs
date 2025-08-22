@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     // Used for later on
     bool isSprinting;
+    private int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -208,7 +209,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     }
 
-    public void StopHeal(int HpOri
+    public void StopHeal(int HpOrig)
     {
         if (CurrentHp <= HpOriginal)
         {
