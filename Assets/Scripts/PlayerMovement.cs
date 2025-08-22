@@ -1,8 +1,8 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     // Used for later on
     bool isSprinting;
-    private int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -132,16 +131,16 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if(dmg != null)
+            if (dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
-   
 
-    public void UpdatePlayerUI() 
+
+    public void UpdatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -162,7 +161,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     public void takeDamage(int amount)
     {
-         
+
         Hp -= amount;
 
         UpdatePlayerUI();
@@ -172,8 +171,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         {
             gameManager.instance.youLose();
         }
-    
-}
+
+    }
 
     void changeGun()
     {
@@ -198,13 +197,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
             changeGun();
         }
     }
-    public void getGunStats(gunStats gun)
-    {
-        gunList.Add(gun);
-        gunListPos = gunList.Count - 1;
-
-        changeGun();
-    }
 
     public void heal(int amount)
     {
@@ -216,11 +208,19 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     }
 
-    public void StopHeal(int HpOriginal)
+    public void StopHeal(int HpOri
     {
-       if (CurrentHp <= HpOriginal)
+        if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
         }
     }
 }
+
+    // Started making a heal not realizing someone else had already started
+//    // Heal
+//    public void Heal(int amount)
+//    {
+//        Hp = Mathf.Max(Hp + amount, HpOriginal);
+//        UpdatePlayerUI();
+//    }

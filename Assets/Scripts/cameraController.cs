@@ -1,17 +1,22 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    [SerializeField] int sens;
+    [SerializeField] float sens = 500f;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
     float rotX;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        // Get saved sens
+        sens = PlayerPrefs.GetFloat("MouseSens", sens);
     }
 
     // Update is called once per frame
@@ -35,5 +40,19 @@ public class cameraController : MonoBehaviour
 
         //Rotate the player to look left/right
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+
+    // Set sens
+    public void SetSensitivity(float value)
+    {
+        sens = value;
+        PlayerPrefs.SetFloat("MouseSens", sens);
+        PlayerPrefs.Save();
+    }
+
+         // Get Sens aka saved sens
+    public float GetSensitivity()
+    {
+        return sens;
     }
 }
