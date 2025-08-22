@@ -1,7 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class buttonFunctions : MonoBehaviour
 {
+    public GameObject menuPause;
+    public GameObject settingsMenu;
+
     public void resume()
     {
         gameManager.instance.stateUnpause();
@@ -27,5 +31,17 @@ public class buttonFunctions : MonoBehaviour
             Application.Quit();
 #endif
 
+    }
+
+    public void settings()
+    {
+        menuPause.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void backToPause()
+    {
+        settingsMenu.SetActive(false);
+        menuPause.SetActive(true);
     }
 }

@@ -10,7 +10,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject settingsMenu;
 
     [SerializeField] TMP_Text gameGoalCountText;
 
@@ -92,5 +92,22 @@ public class gameManager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void settings()
+    {
+        if (menuActive != null)
+            menuActive.SetActive(false);
+
+        settingsMenu.SetActive(true);
+        menuActive = settingsMenu;
+    }
+
+    public void backToPause()
+    {
+        settingsMenu.SetActive(false);
+
+        menuPause.SetActive(true);
+        menuActive = menuPause;
     }
 }
