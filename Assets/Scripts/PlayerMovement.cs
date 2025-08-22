@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     // Gun
     [SerializeField] GameObject gunModel;
-    //[SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -82,11 +82,11 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        //if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
             shoot();
 
-        //selectGun();
-        //reload();
+        selectGun();
+        reload();
     }
 
     void jump()
@@ -112,13 +112,13 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         }
     }
 
-    //void reload()
-    //{
-    //    if (Input.GetButtonDown("Reload"))
-    //    {
-    //        gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
-    //    }
-    //}
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        }
+    }
 
     void shoot()
     {
@@ -152,12 +152,12 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         gameManager.instance.playerDmgScreen.SetActive(false);
     }
 
-    //IEnumerator flashHealScreen()
-    //{
-    //    gameManager.instance.playerHealScreen.SetActive(true);
-    //    yield return new WaitForSeconds(0.2f);
-    //    gameManager.instance.playerHealScreen.SetActive(false);
-    //}
+    IEnumerator flashHealScreen()
+    {
+        gameManager.instance.playerHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        gameManager.instance.playerHealScreen.SetActive(false);
+    }
 
     public void takeDamage(int amount)
     {
@@ -174,47 +174,47 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     }
 
-    //void changeGun()
-    //{
-    //    shootDmg = gunList[gunListPos].shootDamage;
-    //    shootDistance = gunList[gunListPos].shootDistance;
-    //    shootRate = gunList[gunListPos].shootRate;
+    void changeGun()
+    {
+        shootDmg = gunList[gunListPos].shootDamage;
+        shootDistance = gunList[gunListPos].shootDistance;
+        shootRate = gunList[gunListPos].shootRate;
 
-    //    gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
-    //    gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
-    //}
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
 
-    //void selectGun()
-    //{
-    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
-    //    {
-    //        gunListPos++;
-    //        changeGun();
-    //    }
-    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
-    //    {
-    //        gunListPos--;
-    //        changeGun();
-    //    }
-    //}
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
 
-    //public void heal(int amount)
-    //{
-    //    Hp += amount;
+    public void heal(int amount)
+    {
+        Hp += amount;
 
-    //    UpdatePlayerUI();
-    //    StartCoroutine(flashHealScreen());
-    //    StopHeal(HpOriginal);
+        UpdatePlayerUI();
+        StartCoroutine(flashHealScreen());
+        StopHeal(HpOriginal);
 
-    //}
+    }
 
-    //public void StopHeal(int HpOri
-    //{
-    //    if (CurrentHp <= HpOriginal)
-    //    {
-    //        CurrentHp = Hp;
-    //    }
-    //}
+    public void StopHeal(int HpOri
+    {
+        if (CurrentHp <= HpOriginal)
+        {
+            CurrentHp = Hp;
+        }
+    }
 }
 
     // Started making a heal not realizing someone else had already started
