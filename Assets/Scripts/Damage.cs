@@ -42,21 +42,24 @@ public class Damage : MonoBehaviour
 
         if (other.isTrigger)
             return;
-
-        if (dmg != null && type != DamageType.DOT)
+        
+        if(dmg != null)
         {
-            dmg.takeDamage(damageAmount);
-        }
+            if(type != DamageType.DOT)
+            {
+                dmg.takeDamage(damageAmount);
+            }
 
-        if (type == DamageType.moving || type == DamageType.Homing)
-        {
-            Destroy(gameObject);
-        }
+            if (type == DamageType.moving || type == DamageType.Homing)
+            {
+                Destroy(gameObject);
+            }
 
-        if (type == DamageType.stationary) 
-        {
-            dmg.takeDamage(damageAmount);
-            Destroy(gameObject);
+            if (type == DamageType.stationary)
+            {
+                dmg.takeDamage(damageAmount);
+                Destroy(gameObject);
+            }
         }
     }
 
