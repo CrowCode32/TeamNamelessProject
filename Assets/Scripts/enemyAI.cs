@@ -132,6 +132,13 @@ public class enemyAI : MonoBehaviour, IDamage
         model.material.color = colorOrig;
     }
 
+    IEnumerator bossIndicatorThree()
+    {
+        model.material.color = Color.grey;
+        yield return new WaitForSeconds(2f);
+        model.material.color = colorOrig;
+    }
+
     IEnumerator bossIndicatorFour()
     {
         model.material.color = Color.pink;
@@ -141,11 +148,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator bossAttackOne()
     {
-        float origSpeed = agent.speed;
-        agent.speed = 20;
+        
+        agent.speed = agent.speed*6;
         shootRate = shootRate / 5;
-        yield return new WaitForSeconds(2f);
-        agent.speed = origSpeed;
+        yield return new WaitForSeconds(3f);
+        agent.speed = agent.speed / 6;
         shootRate = shootRate * 5;
     }
 
@@ -157,12 +164,11 @@ public class enemyAI : MonoBehaviour, IDamage
         shockwave.gameObject.SetActive(true);
       
 
-        float growTime = 2.5f;
+        float growTime = 2.5f; //Attack stats. Can be changed if needed.
         float maxScale = 10f;
-        
         float elapsed = 0f;
 
-        while (elapsed < growTime)
+        while (elapsed < growTime)  //while elapsed < growTime, expand.
         {
             elapsed += Time.deltaTime;
             float t = elapsed / growTime;
@@ -186,7 +192,7 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator bossAttackFour()
     {
         //Sweeping Laser Beam
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); //Delay for the indicator
         laserBeam.gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         laserBeam.gameObject.SetActive(false);
@@ -198,7 +204,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
        
             bossAttackTimer = 0;
-            int attack = 2;
+            int attack = Random.Range(1,5);  
+
 
             if(attack == 1)
             {
@@ -213,7 +220,7 @@ public class enemyAI : MonoBehaviour, IDamage
             }
             else if (attack == 3)
             {
-                StartCoroutine(bossIndicator());
+                StartCoroutine(bossIndicatorThree());
                 StartCoroutine(bossAttackThree());
             }
             else if (attack == 4)
@@ -222,8 +229,5 @@ public class enemyAI : MonoBehaviour, IDamage
                 StartCoroutine(bossAttackFour());
             }
         
-        
-
-
     }
 }
