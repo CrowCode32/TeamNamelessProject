@@ -132,9 +132,9 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashDmgScreen()
     {
-        gameManager.instance.playerDamageScreen.SetActive(true);
+        gameManager.instance.playerDmgScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.playerDamageScreen.SetActive(false);
+        gameManager.instance.playerDmgScreen.SetActive(false);
     }
 
     IEnumerator flashHealScreen()

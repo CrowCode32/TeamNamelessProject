@@ -8,21 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 2057295077159314948}
-  - component: {fileID: 7400132116789200099}
-  - component: {fileID: 1985648927938902494}
-  - component: {fileID: 344849676225225618}
-  - component: {fileID: 8952944046693587324}
-  m_Layer: 0
-=======
   - component: {fileID: 1862335838236876993}
   - component: {fileID: 3398630685362536720}
   - component: {fileID: 3103360579454100336}
   - component: {fileID: -1751572405093810820}
   - component: {fileID: 8036736940307323954}
   m_Layer: 7
->>>>>>> aeaf91e4e61bb1040bf695f869a02bff3901d867
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
