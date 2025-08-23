@@ -1,7 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+<<<<<<< HEAD
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IPickups
+=======
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+>>>>>>> parent of f404669 (Created Pickup, IPickups scripts along with a tester health pack.)
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -175,12 +179,5 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IPickups
         {
             CurrentHp = Hp;
         }
-    }
-
-    public void GetHealthStats(HealthPackStats health)
-    {
-        Hp += health.healthAmount;
-
-        UpdatePlayerUI();
     }
 }
