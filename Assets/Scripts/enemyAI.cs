@@ -82,7 +82,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void checkRoam()
     {
-        if(roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
+        if (roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
         {
             roam();
         }
@@ -171,7 +171,7 @@ public class enemyAI : MonoBehaviour, IDamage
         shootTimer = 0;
 
         anim.SetTrigger("Shoot");
-        
+
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 

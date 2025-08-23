@@ -21,9 +21,9 @@ public class buttonFunctions : MonoBehaviour
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#else   
+#else
         Application.Quit();
 #endif
-        
+
     }
 }
