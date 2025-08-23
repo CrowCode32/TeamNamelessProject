@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurrent > 0 && shootTimer >= shootRate)
             shoot();
 
         selectGun();
@@ -117,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     {
         if (Input.GetButtonDown("Reload"))
         {
-            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
+            gunList[gunListPos].ammoCurrent = gunList[gunListPos].ammoMax;
         }
     }
 
@@ -178,8 +178,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     public void changeGun()
     {
 
-        shootDmg = gunList[gunListPos].shootDamage;
-        shootDistance = gunList[gunListPos].shootDistance;
+        shootDmg = gunList[gunListPos].shootDmg;
+        shootDistance = gunList[gunListPos].shootDmg;
         shootRate = gunList[gunListPos].shootRate;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
@@ -222,8 +222,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     {
         gunList.Add(gun);
 
-        shootDmg = gun.shootDamage;
-        shootDistance = gun.shootDistance;
+        shootDmg = gun.shootDmg;
+        shootDistance = gun.shootDist;
         shootRate = gun.shootRate;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;

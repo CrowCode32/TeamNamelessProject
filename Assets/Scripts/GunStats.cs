@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class GunStats : MonoBehaviour
+[CreateAssetMenu]
+public class GunStats : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public GameObject model;
+    [Range(1, 10)] public int shootDmg;
+    [Range(1, 1000)] public int shootDist;
+    [Range(0.1f, 3)] public float shootRate;
+    public int ammoCurrent;
+    [Range(5, 50)] public int ammoMax;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public ParticleSystem hitEffect;
+    public AudioClip[] shootSound;
+    [Range(0, 1)] public float shootVolume;
+
 }
