@@ -54,6 +54,14 @@ public class enemyAI : MonoBehaviour, IDamage
             if (shootTimer >= shootRate)
             {
                 shoot();
+
+                if (IsBoss)
+                {
+                    if (bossAttackTimer > bossAttackRate)
+                    {
+                        bossAttacks();
+                    }
+                }
             }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -62,13 +70,7 @@ public class enemyAI : MonoBehaviour, IDamage
             }
         }
 
-        if(IsBoss)
-        {
-            if (bossAttackTimer > bossAttackRate)
-            {
-                bossAttacks();
-            }
-        }
+      
 
     }
     void faceTarget()
