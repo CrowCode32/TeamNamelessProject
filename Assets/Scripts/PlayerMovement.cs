@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     // Gun
     [SerializeField] GameObject gunModel;
-    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     int jumpCount;
     int HpOriginal;
     int CurrentHp;
+    int gunListPos;
 
     // Used for later on
     bool isSprinting;
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
             shoot();
 
         selectGun();
@@ -115,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     {
         if (Input.GetButtonDown("Reload"))
         {
-            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
         }
     }
 
@@ -173,8 +175,9 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     
 }
 
-    void changeGun()
+    public void changeGun()
     {
+
         shootDmg = gunList[gunListPos].shootDamage;
         shootDistance = gunList[gunListPos].shootDistance;
         shootRate = gunList[gunListPos].shootRate;
@@ -213,5 +216,17 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         {
             CurrentHp = Hp;
         }
+    }
+
+    public void getGunStats(GunStats gun)
+    {
+        gunList.Add(gun);
+
+        shootDmg = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }
