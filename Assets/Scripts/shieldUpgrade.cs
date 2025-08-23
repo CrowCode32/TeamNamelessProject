@@ -22,20 +22,22 @@ public class shieldUpgrade : MonoBehaviour
             shieldDurability = maxDurability;
             shield.enabled = true;
             shieldCharged = false;
+            gameManager.instance.shieldBar.enabled = true;
         } 
 
         if(shieldDurability == 0)
         {
             shield.enabled = false;
+            gameManager.instance.shieldBar.enabled = false;
         }
         
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 7)
         {
             shieldDurability--;
         }
-    }*/
+    }
 }
