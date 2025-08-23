@@ -217,34 +217,6 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 13743514, guid: 2599104a4a2a5214f8407d03827b5eff, type: 3}
   m_PrefabInstance: {fileID: 913900637}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &366393408 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3184780831501016979, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
-  m_PrefabInstance: {fileID: 705939914}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &366393409
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 366393408}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &366393415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2554447353957553138, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
@@ -321,10 +293,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2554447353957553138, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2073708715}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3184780831501016979, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 366393409}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae1e2e3b92dfd764c9d05bd1f2d1b98a, type: 3}
 --- !u!1 &832575517
 GameObject:
@@ -389,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111614, guid: 2599104a4a2a5214f8407d03827b5eff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 432436, guid: 2599104a4a2a5214f8407d03827b5eff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,8 +601,8 @@ PrefabInstance:
       objectReference: {fileID: 1003755799}
     - target: {fileID: 5030185739952587550, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
       propertyPath: shieldActive
-      value: 
-      objectReference: {fileID: 1003755799}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953147596270253673, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1287,7 +1256,7 @@ GameObject:
   - component: {fileID: 2073708716}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1322,6 +1291,7 @@ MonoBehaviour:
   shield: {fileID: 2073708717}
   shieldDurability: 3
   shieldCharged: 1
+  shieldDmg: 1
 --- !u!136 &2073708717
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1337,7 +1307,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2

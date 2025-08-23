@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class shieldUpgrade : MonoBehaviour
+public class shieldUpgrade : MonoBehaviour, IDamage
 {
     [SerializeField] CapsuleCollider shield;
     [SerializeField] int shieldDurability;
     [SerializeField] bool shieldCharged;
+    [SerializeField] int shieldDmg;
     int maxDurability;
 
     // Update is called once per frame
     private void Start()
     {
         maxDurability = shieldDurability;
+        //gameManager.instance.shieldActive = shield.enabled;
     }
 
     void Update()
@@ -33,11 +35,8 @@ public class shieldUpgrade : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void takeDamage(int amount)
     {
-        if(other.gameObject.layer == 7)
-        {
-            shieldDurability--;
-        }
+        shieldDurability -= amount;
     }
 }
