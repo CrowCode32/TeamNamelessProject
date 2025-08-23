@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 9197031495264112614}
   - component: {fileID: 2069928826228244167}
   - component: {fileID: 88138103509040605}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player (with flashlight)
   m_TagString: Player
   m_Icon: {fileID: 0}
