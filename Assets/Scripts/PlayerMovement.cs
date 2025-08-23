@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -14,6 +16,9 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     [SerializeField] int jumpSpeed;
     [SerializeField] int JumpMax;
     [SerializeField] int gravity;
+
+    [SerializeField] GameObject gunModel;
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
 
     //shoot
     [SerializeField] int shootDmg;
@@ -31,6 +36,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     int jumpCount;
     int HpOriginal;
     int CurrentHp;
+    int gunListPosition;
 
     // Used for later on
     bool isSprinting;
@@ -48,6 +54,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
 
+        if(!gameManager.instance.isPaused)
         movement();
         sprint();
     }
@@ -76,10 +83,14 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
+        if (Input.GetButton("Fire1") && shootTimer > shootRte && gunList.Count > 0 && gunList[gunListPosition].ammoCurr > 0)
         {
             shoot();
         }
+
+        changeGun();
+
+        reload();
     }
 
     void jump()
@@ -108,11 +119,13 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     void shoot()
     {
         shootTimer = 0;
+        gunList[gunListPosition].ammoCurr--;
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
+            Instantiate(gunList[gunListPosition].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
@@ -120,6 +133,14 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
             {
                 dmg.takeDamage(shootDmg);
             }
+        }
+    }
+
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            gunList[gunListPosition].ammoCurr = gunList[gunListPosition].ammoMax;
         }
     }
 
@@ -174,6 +195,38 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
        if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
+        }
+    }
+
+    public void getGunStats(GunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPosition = gunList.Count -1;
+
+        switchGun();
+    }
+
+    void switchGun()
+    {
+        shootDmg = gunList[gunListPosition].shootDamage;
+        shootDist = gunList[gunListPosition].shootDistance;
+        shootRte = gunList[gunListPosition].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPosition].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPosition].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void changeGun()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPosition < gunList.Count - 1)
+        {
+            gunListPosition++;
+            switchGun();
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPosition > 0)
+        {
+            gunListPosition--;
+            switchGun();
         }
     }
 }
