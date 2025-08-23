@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IPickups
 {
     [SerializeField] LayerMask ignoreLayer;
 

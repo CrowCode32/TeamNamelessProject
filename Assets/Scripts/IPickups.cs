@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IPickup
+public interface IPickups
 {
     public void GetHealthStats(HealthPackStats health);
 }
