@@ -159,7 +159,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-
         if (HP > 0)
         {
             HP -= amount;

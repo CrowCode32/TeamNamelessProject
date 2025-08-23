@@ -12,7 +12,6 @@ public class shieldUpgrade : MonoBehaviour, IDamage
     private void Start()
     {
         maxDurability = shieldDurability;
-        //gameManager.instance.shieldActive = shield.enabled;
     }
 
     void Update()
