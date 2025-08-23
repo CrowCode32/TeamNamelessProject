@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Damage : MonoBehaviour
 {
-    enum DamageType { moving, stationary, DOT, Homing }
+    enum DamageType { moving, stationary, DOT, Homing, laser }
     [SerializeField] DamageType type;
     [SerializeField] Rigidbody Rb;
 
@@ -59,6 +59,14 @@ public class Damage : MonoBehaviour
             {
                 dmg.takeDamage(damageAmount);
                 Destroy(gameObject);
+            }
+            
+            if (type == DamageType.laser)
+            {
+                if (!isDamaging)
+                {
+                    StartCoroutine(damageOther(dmg));
+                }
             }
         }
     }
