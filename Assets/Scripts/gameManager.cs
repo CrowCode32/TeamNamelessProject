@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
 
     public Image playerHPBar;
     public Image shieldBar;
+    public Image shieldCharge;
     public GameObject playerDmgScreen;
     public GameObject playerHealScreen;
 
@@ -26,8 +27,6 @@ public class gameManager : MonoBehaviour
     float timeScaleOrig;
 
     int gameGoalCount;
-
-    public bool shieldActive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()

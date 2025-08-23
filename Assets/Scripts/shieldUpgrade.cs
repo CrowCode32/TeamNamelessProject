@@ -5,6 +5,7 @@ public class shieldUpgrade : MonoBehaviour, IDamage
     [SerializeField] CapsuleCollider shield;
     [SerializeField] int shieldDurability;
     [SerializeField] bool shieldCharged;
+    [SerializeField] float chargeAmount;
     [SerializeField] int shieldDmg;
     int maxDurability;
 
@@ -12,6 +13,7 @@ public class shieldUpgrade : MonoBehaviour, IDamage
     private void Start()
     {
         maxDurability = shieldDurability;
+        gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
     }
 
     void Update()
@@ -24,12 +26,14 @@ public class shieldUpgrade : MonoBehaviour, IDamage
             shield.enabled = true;
             shieldCharged = false;
             gameManager.instance.shieldBar.enabled = true;
+            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         } 
 
         if(shieldDurability == 0)
         {
             shield.enabled = false;
             gameManager.instance.shieldBar.enabled = false;
+            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         }
         
     }
