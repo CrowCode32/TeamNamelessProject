@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 9197031495264112614}
   - component: {fileID: 2069928826228244167}
   - component: {fileID: 88138103509040605}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Player (with flashlight)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184780831501016979}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.000000010759172, y: -0.7071071, z: 0.000000010759272, w: 0.7071065}
   m_LocalPosition: {x: 7.5, y: 1.4999989, z: -12.750002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -210,13 +210,13 @@ MonoBehaviour:
   controller: {fileID: 2069928826228244167}
   speed: 5
   sprintMod: 2
-  jumpSpeed: 3
+  jumpSpeed: 5
   JumpMax: 1
-  gravity: 1
+  gravity: 35
   shootDmg: 1
-  shootRte: 1
+  shootRate: 1
   shootDist: 15
-  Hp: 40
+  Hp: 20
 --- !u!33 &5137643247833060424
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -362,8 +362,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.8836478, g: 1, b: 0.994486, a: 1}
-  m_Intensity: 20
-  m_Range: 20
+  m_Intensity: 13
+  m_Range: 11
   m_SpotAngle: 82.54544
   m_InnerSpotAngle: 27.869099
   m_CookieSize: 10
