@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -175,5 +175,12 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         {
             CurrentHp = Hp;
         }
+    }
+
+    public void GetHealthStats(HealthPackStats health)
+    {
+        Hp += health.healthAmount;
+
+        UpdatePlayerUI();
     }
 }
