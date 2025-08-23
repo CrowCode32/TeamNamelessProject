@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
@@ -18,16 +17,11 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDistance;
+    [SerializeField] float shootRte;
+    [SerializeField] int shootDist;
 
     //Health
     [SerializeField] int Hp;
-
-
-    // Gun
-    [SerializeField] GameObject gunModel;
-    [SerializeField] List<GunStats> gunList = new List<GunStats>();
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -37,7 +31,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     int jumpCount;
     int HpOriginal;
     int CurrentHp;
-    int gunListPos;
 
     // Used for later on
     bool isSprinting;
@@ -53,7 +46,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
 
         movement();
         sprint();
@@ -83,11 +76,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
+        {
             shoot();
-
-        selectGun();
-        reload();
+        }
     }
 
     void jump()
@@ -113,20 +105,12 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-    void reload()
-    {
-        if (Input.GetButtonDown("Reload"))
-        {
-            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
-        }
-    }
-
     void shoot()
     {
         shootTimer = 0;
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
 
@@ -175,31 +159,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     
 }
 
-    public void changeGun()
-    {
-
-        shootDmg = gunList[gunListPos].shootDamage;
-        shootDistance = gunList[gunListPos].shootDistance;
-        shootRate = gunList[gunListPos].shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
-    }
-
-    void selectGun()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
-        {
-            gunListPos++;
-            changeGun();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
-        {
-            gunListPos--;
-            changeGun();
-        }
-    }
-
     public void heal(int amount)
     {
         Hp += amount;
@@ -218,15 +177,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-    public void getGunStats(GunStats gun)
+    public void GetHealthStats(HealthPackStats health)
     {
-        gunList.Add(gun);
+        Hp += health.healthAmount;
 
-        shootDmg = gun.shootDamage;
-        shootDistance = gun.shootDistance;
-        shootRate = gun.shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+        UpdatePlayerUI();
     }
 }

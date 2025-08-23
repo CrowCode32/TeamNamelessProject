@@ -242,8 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3832703582600944448}
-  - component: {fileID: 7801270025495799968}
-  - component: {fileID: 245184613657671930}
+  - component: {fileID: 7260023916486664945}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -270,15 +269,7 @@ Transform:
   - {fileID: 3832703582600944456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7801270025495799968
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3832703582600972128}
-  m_Mesh: {fileID: 4300004, guid: 7d06582fc8e311644a92e6d9e9cab273, type: 3}
---- !u!23 &245184613657671930
+--- !u!23 &7260023916486664945
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,6 +293,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 126aeccc6c094bb48a7584d58853792c, type: 2}
+  - {fileID: 2100000, guid: 4e7a7c7b1c24c6242bc7b9b76b31f7ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
