@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class enemyAI : MonoBehaviour, IDamage
+public class RunnerAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animator anim;
+   // [SerializeField] Animator anim;
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
@@ -15,10 +15,10 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamPauseTime;
     [SerializeField] int animSpeedTrans;
 
-    [SerializeField] GameObject bullet;
+    [SerializeField] GameObject mine;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
- 
+
 
 
     Color colorOrig;
@@ -67,14 +67,14 @@ public class enemyAI : MonoBehaviour, IDamage
     void setAnimations()
     {
         float agentSpeed = agent.velocity.normalized.magnitude;
-        float animSpeedCurr = anim.GetFloat("Speed");
+      //  float animSpeedCurr = anim.GetFloat("Speed");
 
-        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr,agentSpeed, Time.deltaTime * animSpeedTrans));
+      //  anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr, agentSpeed, Time.deltaTime * animSpeedTrans));
     }
 
     void checkRoam()
     {
-        if(roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
+        if (roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
         {
             roam();
         }
@@ -109,18 +109,21 @@ public class enemyAI : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
             {
 
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                //agent.SetDestination(gameManager.instance.player.transform.position);
+                Vector3 fleeDirection = (transform.position - gameManager.instance.player.transform.position).normalized;
+                Vector3 fleeTarget = transform.position + fleeDirection * roamDistance;
+
+                NavMeshHit fleeHit;
+
+                if(NavMesh.SamplePosition(fleeTarget, out fleeHit, roamDistance, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(fleeHit.position);
+                }
 
                 if (shootTimer >= shootRate)
                 {
-                    shoot();
+                    drop();
                 }
-
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    faceTarget();
-                }
-                agent.stoppingDistance = stoppingDistanceOriginal;
                 return true;
             }
         }
@@ -149,13 +152,14 @@ public class enemyAI : MonoBehaviour, IDamage
             agent.stoppingDistance = 0;
         }
     }
-    void shoot()
+    void drop()
     {
         shootTimer = 0;
 
-        anim.SetTrigger("Shoot");
+      //  anim.SetTrigger("Shoot");
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Vector3 dropPos = transform.position - transform.forward * 1.5f;
+        Instantiate(mine, transform.position, Quaternion.identity);
     }
 
     public void takeDamage(int amount)
