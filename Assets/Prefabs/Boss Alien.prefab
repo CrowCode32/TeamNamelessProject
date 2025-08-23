@@ -360,10 +360,10 @@ MonoBehaviour:
   roamDistance: 5
   roamPauseTime: 5
   animSpeedTrans: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 3419981150564927128, guid: 56fe3f5dd0d9ee045b8506d428ff67a5, type: 3}
   shootRate: 3
   bossAttackRate: 10
-  shootPos: {fileID: 0}
+  shootPos: {fileID: 597721189427934332}
   IsBoss: 1
   laserBeam: {fileID: 8533939016176523670}
   shockwave: {fileID: 2206210543093325653}
