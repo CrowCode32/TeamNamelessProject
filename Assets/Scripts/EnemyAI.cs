@@ -6,19 +6,19 @@ public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
     [SerializeField] int roamDistance;
     [SerializeField] int roamPauseTime;
+    [SerializeField] int animSpeedTrans;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
  
-
-
     Color colorOrig;
 
     float shootTimer;
@@ -44,6 +44,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        setAnimations();
 
         shootTimer += Time.deltaTime;
 
@@ -60,6 +61,14 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             checkRoam();
         }
+    }
+
+    void setAnimations()
+    {
+        float agentSpeedCur = agent.velocity.normalized.magnitude;
+        float animSpeedCur = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeedCur, Time.deltaTime * animSpeedTrans));
     }
 
     void checkRoam()
@@ -142,6 +151,9 @@ public class enemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+
+        anim.SetTrigger("Shoot");
+        
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
