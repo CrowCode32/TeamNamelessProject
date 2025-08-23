@@ -113,22 +113,23 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     IEnumerator flashRed()
     {
+        Color tempColorOrig = model.material.color;
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        model.material.color = tempColorOrig;
     }
 
     IEnumerator bossIndicator()
     {
         model.material.color = Color.purple;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         model.material.color = colorOrig;
     }
 
     IEnumerator bossIndicatorTwo()
     {
         model.material.color = Color.orange;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         model.material.color = colorOrig;
     }
 
@@ -141,7 +142,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator bossIndicatorFour()
     {
-        model.material.color = Color.pink;
+        model.material.color = Color.deepPink;
         yield return new WaitForSeconds(2f);
         model.material.color = colorOrig;
     }
@@ -149,10 +150,10 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator bossAttackOne()
     {
         
-        agent.speed = agent.speed*6;
+        agent.speed = agent.speed*3;
         shootRate = shootRate / 5;
         yield return new WaitForSeconds(3f);
-        agent.speed = agent.speed / 6;
+        agent.speed = agent.speed / 3;
         shootRate = shootRate * 5;
     }
 
@@ -192,7 +193,7 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator bossAttackFour()
     {
         //Sweeping Laser Beam
-        yield return new WaitForSeconds(1f); //Delay for the indicator
+        yield return new WaitForSeconds(1.5f); //Delay for the indicator
         laserBeam.gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         laserBeam.gameObject.SetActive(false);
