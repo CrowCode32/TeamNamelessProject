@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
-
 
 public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
+    [SerializeField] int FOV;
+    [SerializeField] int roamDistance;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int animSpeedTrans;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -27,51 +30,120 @@ public class enemyAI : MonoBehaviour, IDamage
 
     float shootTimer;
     float bossAttackTimer;
+    float angleToPlayer;
+    float roamTimer;
+    float stoppingDistanceOriginal;
 
     bool playerInTrigger;
 
     Vector3 playerDirection;
+    Vector3 startingPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrig = model.material.color;
         gameManager.instance.updateGameGoal(1);
+        startingPos = transform.position;
+        stoppingDistanceOriginal = agent.stoppingDistance;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        setAnimations();
 
         shootTimer += Time.deltaTime;
         bossAttackTimer += Time.deltaTime;
 
-        if (playerInTrigger)
+        if (agent.remainingDistance < 0.01f)
         {
-            playerDirection = gameManager.instance.player.transform.position - transform.position;
+            roamTimer += Time.deltaTime;
+        }
 
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            if (shootTimer >= shootRate)
+        if (playerInTrigger && !CanSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInTrigger)
+        {
+            checkRoam();
+        }
+    }
+
+    void setAnimations()
+    {
+        float agentSpeedCur = agent.velocity.normalized.magnitude;
+        float animSpeedCur = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeedCur, Time.deltaTime * animSpeedTrans));
+    }
+
+    void checkRoam()
+    {
+        if(roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
+        {
+            roam();
+        }
+    }
+
+    void roam()
+    {
+        roamTimer = 0;
+        agent.stoppingDistance = 0;
+
+        Vector3 randomPos = Random.insideUnitSphere * roamDistance;
+        randomPos += startingPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
+        agent.SetDestination(hit.position);
+    }
+
+    bool CanSeePlayer()
+    {
+        playerDirection = gameManager.instance.player.transform.position - transform.position;
+
+        angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
+        Debug.DrawRay(transform.position, playerDirection);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, playerDirection, out hit))
+        {
+
+            //Can See You!!
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
             {
-                shoot();
 
-                if (IsBoss)
+                agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (shootTimer >= shootRate)
                 {
-                    if (bossAttackTimer > bossAttackRate)
-                    {
-                        bossAttacks();
-                    }
-                }
-            }
+                    shoot();
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                faceTarget();
+                    if (IsBoss)
+                    {
+                        if (bossAttackTimer > bossAttackRate)
+                        {
+                            bossAttacks();
+                        }
+                    }
+
+                }
+
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    faceTarget();
+                }
+                agent.stoppingDistance = stoppingDistanceOriginal;
+                return true;
             }
         }
 
-      
-
+        agent.stoppingDistance = 0;
+        return false;
     }
     void faceTarget()
     {
@@ -91,11 +163,15 @@ public class enemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInTrigger = false;
+            agent.stoppingDistance = 0;
         }
     }
     void shoot()
     {
         shootTimer = 0;
+
+        anim.SetTrigger("Shoot");
+        
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
@@ -151,8 +227,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     IEnumerator bossAttackOne()
     {
-        
-        agent.speed = agent.speed*3;
+
+        agent.speed = agent.speed * 3;
         shootRate = shootRate / 5;
         yield return new WaitForSeconds(3f);
         agent.speed = agent.speed / 3;
@@ -165,7 +241,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         shockwave.transform.localScale = Vector3.zero;
         shockwave.gameObject.SetActive(true);
-      
+
 
         float growTime = 2.5f; //Attack stats. Can be changed if needed.
         float maxScale = 10f;
@@ -181,16 +257,16 @@ public class enemyAI : MonoBehaviour, IDamage
             yield return null;
         }
 
-            yield return new WaitForSeconds(.5f);
-            shockwave.gameObject.SetActive(false);
-        
+        yield return new WaitForSeconds(.5f);
+        shockwave.gameObject.SetActive(false);
+
 
     }
     IEnumerator bossAttackThree()
     {
-       //Throw Mines everywhere
+        //Throw Mines everywhere
         yield return new WaitForSeconds(2f);
-        
+
     }
     IEnumerator bossAttackFour()
     {
@@ -205,32 +281,34 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void bossAttacks()
     {
-       
-            bossAttackTimer = 0;
-            int attack = Random.Range(1,5);  
+
+        bossAttackTimer = 0;
+        int attack = Random.Range(1, 5);
 
 
-            if(attack == 1)
-            {
-                StartCoroutine(bossIndicator());
-                StartCoroutine(bossAttackOne());
-              
-            }
-            else if (attack == 2)
-            {
-                StartCoroutine(bossIndicatorTwo());
-                StartCoroutine(bossAttackTwo());
-            }
-            else if (attack == 3)
-            {
-                StartCoroutine(bossIndicatorThree());
-                StartCoroutine(bossAttackThree());
-            }
-            else if (attack == 4)
-            {
-                StartCoroutine(bossIndicatorFour());
-                StartCoroutine(bossAttackFour());
-            }
-        
+        if (attack == 1)
+        {
+            StartCoroutine(bossIndicator());
+            StartCoroutine(bossAttackOne());
+
+        }
+        else if (attack == 2)
+        {
+            StartCoroutine(bossIndicatorTwo());
+            StartCoroutine(bossAttackTwo());
+        }
+        else if (attack == 3)
+        {
+            StartCoroutine(bossIndicatorThree());
+            StartCoroutine(bossAttackThree());
+        }
+        else if (attack == 4)
+        {
+            StartCoroutine(bossIndicatorFour());
+            StartCoroutine(bossAttackFour());
+        }
+
     }
+
+
 }
