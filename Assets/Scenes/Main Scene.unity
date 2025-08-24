@@ -5492,11 +5492,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624127730}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!224 &633257706 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2805237610746144024, guid: b675f9b8968195142994cdc61af71449, type: 3}
-  m_PrefabInstance: {fileID: 1797749646}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &638274858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 863502233692387750, guid: 006c489da0fbed542ac023265159a79f, type: 3}
@@ -17543,9 +17538,6 @@ PrefabInstance:
     - {fileID: 954059869731597609, guid: b675f9b8968195142994cdc61af71449, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2805237610746144024, guid: b675f9b8968195142994cdc61af71449, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 1974027019}
     - targetCorrespondingSourceObject: {fileID: 1991817482064302385, guid: b675f9b8968195142994cdc61af71449, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1331166376}
@@ -19090,7 +19082,7 @@ RectTransform:
   m_GameObject: {fileID: 1974027018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4071088, y: 1.4071088, z: 1.4071088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 953291826}
@@ -19098,11 +19090,11 @@ RectTransform:
   - {fileID: 409535130}
   - {fileID: 1691905200}
   - {fileID: 1096991646}
-  m_Father: {fileID: 633257706}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -959.99994, y: -517.4643}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974027020
@@ -20866,3 +20858,4 @@ SceneRoots:
   - {fileID: 2132671965}
   - {fileID: 284080170}
   - {fileID: 9142233632539356495}
+  - {fileID: 1974027019}
