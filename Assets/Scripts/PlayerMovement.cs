@@ -1,8 +1,8 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IDamage // IHeal
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     // Gun
     [SerializeField] GameObject gunModel;
-    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
     int jumpCount;
     int HpOriginal;
     int CurrentHp;
+    int gunListPos;
 
     // Used for later on
     bool isSprinting;
-    private int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
             shoot();
 
         selectGun();
@@ -117,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
     {
         if (Input.GetButtonDown("Reload"))
         {
-            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
         }
     }
 
@@ -132,16 +132,16 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
+            if(dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
+   
 
-
-    public void UpdatePlayerUI()
+    public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     public void takeDamage(int amount)
     {
-
+         
         Hp -= amount;
 
         UpdatePlayerUI();
@@ -172,11 +172,12 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         {
             gameManager.instance.youLose();
         }
+    
+}
 
-    }
-
-    void changeGun()
+    public void changeGun()
     {
+
         shootDmg = gunList[gunListPos].shootDamage;
         shootDistance = gunList[gunListPos].shootDistance;
         shootRate = gunList[gunListPos].shootRate;
@@ -199,14 +200,6 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
         }
     }
 
-    public void getGunStats(gunStats gun)
-    {
-        gunList.Add(gun);
-        gunListPos = gunList.Count - 1;
-
-        changeGun();
-    }
-
     public void heal(int amount)
     {
         Hp += amount;
@@ -217,19 +210,23 @@ public class PlayerMovement : MonoBehaviour, IDamage // IHeal
 
     }
 
-    public void StopHeal(int HpOrig)
+    public void StopHeal(int HpOriginal)
     {
-        if (CurrentHp <= HpOriginal)
+       if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
         }
     }
-}
 
-    // Started making a heal not realizing someone else had already started
-//    // Heal
-//    public void Heal(int amount)
-//    {
-//        Hp = Mathf.Max(Hp + amount, HpOriginal);
-//        UpdatePlayerUI();
-//    }
+    public void getGunStats(GunStats gun)
+    {
+        gunList.Add(gun);
+
+        shootDmg = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+}

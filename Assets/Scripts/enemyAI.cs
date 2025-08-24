@@ -6,12 +6,14 @@ public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
     [SerializeField] int roamDistance;
     [SerializeField] int roamPauseTime;
+    [SerializeField] int animSpeedTrans;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -44,7 +46,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
+        setAnimations();
         shootTimer += Time.deltaTime;
 
         if (agent.remainingDistance < 0.01f)
@@ -60,6 +62,14 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             checkRoam();
         }
+    }
+
+    void setAnimations()
+    {
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        float animSpeedCurr = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr,agentSpeed, Time.deltaTime * animSpeedTrans));
     }
 
     void checkRoam()
@@ -142,6 +152,9 @@ public class enemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+
+        anim.SetTrigger("Shoot");
+
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
@@ -152,6 +165,8 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             HP -= amount;
             StartCoroutine(flashRed());
+
+            agent.SetDestination(gameManager.instance.player.transform.position);
         }
         if (HP <= 0)
         {
