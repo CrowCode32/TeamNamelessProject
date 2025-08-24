@@ -18,22 +18,18 @@ public class shieldUpgrade : MonoBehaviour, IDamage
 
     void Update()
     {
-        //If the player hasn't picked up the upgrade, return
-        //If the player presses a certain button and the shield has charge, toggle on; else off
         if (Input.GetButtonDown("Shield") && shieldCharged == true)
         {
             shieldDurability = maxDurability;
             shield.enabled = true;
             shieldCharged = false;
             gameManager.instance.shieldBar.enabled = true;
-            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         } 
 
         if(shieldDurability == 0)
         {
             shield.enabled = false;
             gameManager.instance.shieldBar.enabled = false;
-            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         }
         
     }
