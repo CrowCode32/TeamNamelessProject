@@ -363,7 +363,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   shootRate: 3
   bossAttackRate: 10
-  shootPos: {fileID: 0}
+  shootPos: {fileID: 597721189427934332}
   IsBoss: 1
   laserBeam: {fileID: 8533939016176523670}
   shockwave: {fileID: 2206210543093325653}
