@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 2375413476625743932}
   - component: {fileID: 4535682543896599704}
   - component: {fileID: 235540495150209889}
+  - component: {fileID: 1057277448483494423}
   - component: {fileID: 2755352639562298275}
   - component: {fileID: 3827203239076122112}
   - component: {fileID: 5616917620804053095}
@@ -353,14 +354,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 3827203239076122112}
   agent: {fileID: 235540495150209889}
-  anim: {fileID: 0}
+  anim: {fileID: 1057277448483494423}
   HP: 50
   faceTargetSpeed: 8
   FOV: 120
   roamDistance: 5
   roamPauseTime: 5
   animSpeedTrans: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 3419981150564927128, guid: 56fe3f5dd0d9ee045b8506d428ff67a5, type: 3}
   shootRate: 3
   bossAttackRate: 10
   shootPos: {fileID: 597721189427934332}
@@ -390,6 +391,28 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &1057277448483494423
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627409356916068392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!33 &2755352639562298275
 MeshFilter:
   m_ObjectHideFlags: 0
