@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IShieldPickups
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -23,9 +23,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IShieldPic
 
     //Health
     [SerializeField] int Hp;
-    [SerializeField] shieldStats shield;
-    [SerializeField] int shieldDurability;
-    [SerializeField] bool shieldCharged;
+
+    [SerializeField] GameObject shield;
     
 
     Vector3 moveDir;
@@ -55,7 +54,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IShieldPic
 
         movement();
         sprint();
-        ActivateShield();
+            
     }
 
     void movement()
@@ -134,7 +133,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IShieldPic
     public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
-        gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
     }
 
     IEnumerator flashDmgScreen()
@@ -189,37 +187,5 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IShieldPic
         Hp += health.healthAmount;
 
         UpdatePlayerUI();
-    }
-
-    public void GetShieldStats(shieldStats newShield)
-    {
-        shield = newShield;
-        shieldDurability = newShield.shieldDurability;
-        shieldCharged = newShield.shieldCharged;
-
-        UpdatePlayerUI();
-    }
-
-    void ActivateShield()
-    {
-        GameObject shield = GameObject.Find("Shield");
-        CapsuleCollider shieldCollider = shield.GetComponent<CapsuleCollider>();
-
-        if (Input.GetButtonDown("Shield") && shieldCharged == true)
-        {
-            shieldCollider.enabled = true;
-            shieldCharged = false;
-            gameManager.instance.shieldBar.enabled = true;
-
-            UpdatePlayerUI();
-        }
-
-        if(shieldDurability == 0)
-        {
-            shieldCollider.enabled = false;
-            gameManager.instance.shieldBar.enabled = false;
-
-            UpdatePlayerUI();
-        }
     }
 }

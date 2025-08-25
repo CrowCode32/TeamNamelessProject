@@ -3,11 +3,9 @@ using UnityEngine;
 public class shieldUpgrade : MonoBehaviour, IDamage
 {
     [SerializeField] CapsuleCollider shield;
-    [SerializeField] int shieldDurability;
-    [SerializeField] bool shieldCharged;
-    [SerializeField] float chargeAmount;
-    [SerializeField] int shieldDmg;
-    int maxDurability;
+    [SerializeField] public int shieldDurability;
+    public int maxDurability;
+    public bool shieldCharged;
 
     // Update is called once per frame
     private void Start()
@@ -24,12 +22,15 @@ public class shieldUpgrade : MonoBehaviour, IDamage
             shield.enabled = true;
             shieldCharged = false;
             gameManager.instance.shieldBar.enabled = true;
+            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         } 
 
         if(shieldDurability == 0)
         {
             shield.enabled = false;
+            shieldCharged = false;
             gameManager.instance.shieldBar.enabled = false;
+            gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         }
         
     }
