@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1269515069039051419}
   - component: {fileID: 4224776180623331818}
   - component: {fileID: 982456018038798718}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2272381311324195110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317ddf0c810928c4ba896fa510c4bec8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5091771d8fae22645967270164e1cde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
@@ -187,7 +187,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7356710280376709873}
-  - component: {fileID: 3493755482699983230}
   - component: {fileID: 7643666120139858079}
   - component: {fileID: 8228516379757427500}
   - component: {fileID: 8612527314653239937}
@@ -215,24 +214,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8673798701629957426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3493755482699983230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4281030595153287842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317ddf0c810928c4ba896fa510c4bec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  Rb: {fileID: 7619714331634656052}
-  damageAmount: 5
-  damageRate: 0
-  MoveSpeed: 0
-  destroyTime: 0
 --- !u!33 &7643666120139858079
 MeshFilter:
   m_ObjectHideFlags: 0
