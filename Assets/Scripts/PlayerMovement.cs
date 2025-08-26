@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -18,16 +18,14 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDistance;
+    [SerializeField] float shootRte;
+    [SerializeField] int shootDist;
 
     //Health
     [SerializeField] int Hp;
 
-
-    // Gun
-    [SerializeField] GameObject gunModel;
-    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] GameObject shield;
+    
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -40,7 +38,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     // Used for later on
     bool isSprinting;
-    private int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,10 +50,11 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
 
         movement();
         sprint();
+            
     }
 
     void movement()
@@ -83,11 +81,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
+        {
             shoot();
-
-        selectGun();
-        reload();
+        }
     }
 
     void jump()
@@ -113,35 +110,27 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         }
     }
 
-    void reload()
-    {
-        if (Input.GetButtonDown("Reload"))
-        {
-            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
-        }
-    }
-
     void shoot()
     {
         shootTimer = 0;
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
+            if(dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
+   
 
-
-    public void UpdatePlayerUI()
+    public void UpdatePlayerUI() 
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -162,7 +151,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     public void takeDamage(int amount)
     {
-
+         
         Hp -= amount;
 
         UpdatePlayerUI();
@@ -172,40 +161,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
         {
             gameManager.instance.youLose();
         }
-
-    }
-
-    void changeGun()
-    {
-        shootDmg = gunList[gunListPos].shootDamage;
-        shootDistance = gunList[gunListPos].shootDistance;
-        shootRate = gunList[gunListPos].shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
-    }
-
-    void selectGun()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
-        {
-            gunListPos++;
-            changeGun();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
-        {
-            gunListPos--;
-            changeGun();
-        }
-    }
-
-    public void getGunStats(gunStats gun)
-    {
-        gunList.Add(gun);
-        gunListPos = gunList.Count - 1;
-
-        changeGun();
-    }
+    
+}
 
     public void heal(int amount)
     {
@@ -217,19 +174,18 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
 
     }
 
-    public void StopHeal(int HpOrig)
+    public void StopHeal(int HpOriginal)
     {
-        if (CurrentHp <= HpOriginal)
+       if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
         }
     }
-}
 
-    // Started making a heal not realizing someone else had already started
-//    // Heal
-//    public void Heal(int amount)
-//    {
-//        Hp = Mathf.Max(Hp + amount, HpOriginal);
-//        UpdatePlayerUI();
-//    }
+    public void GetHealthStats(HealthPackStats health)
+    {
+        Hp += health.healthAmount;
+
+        UpdatePlayerUI();
+    }
+}
