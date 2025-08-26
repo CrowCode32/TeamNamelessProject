@@ -74,7 +74,7 @@ public class Damage : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         IDamage dmg = other.GetComponent<IDamage>();
-
+        
         if (other.isTrigger)
             return;
 
