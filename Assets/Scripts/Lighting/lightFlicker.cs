@@ -13,7 +13,7 @@ public class FlickeringLight : MonoBehaviour
 
     void Update()
     {
-        // Rapid flicker
+        //Rapid flicker
         timer += Time.deltaTime;
         if (timer >= flickerInterval)
         {
