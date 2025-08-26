@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPrefab: {fileID: 6883469882559284734}
-  bossEnemy: {fileID: 0}
+  bossEnemy: {fileID: 5627409356916068392, guid: b682e4ad90a5dc043bcc35718fd7d7c9, type: 3}
   openOffset: {x: -10, y: 0, z: 0}
 --- !u!33 &2298072835562126808
 MeshFilter:
