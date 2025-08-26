@@ -6,8 +6,8 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuControls;
