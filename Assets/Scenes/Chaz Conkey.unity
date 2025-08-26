@@ -228,17 +228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &448101297 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 954059869731597609, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2672d1625e869f44828e87d675f164e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &473207561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,74 +504,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13b3354997537de4f8745a24f67b5afe, type: 3}
---- !u!1 &1009844200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1009844201}
-  - component: {fileID: 1009844203}
-  - component: {fileID: 1009844202}
-  m_Layer: 0
-  m_Name: SettingsMenu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1009844201
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009844200}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.820435, y: -540, z: 990.94147}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1036521972}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1009844202
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009844200}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1009844203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009844200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4979324178e3a0347b08f0a3eb084ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensSlider: {fileID: 1036521973}
-  sensLabel: {fileID: 1036521974}
 --- !u!1001 &1036521969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,26 +512,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 551817451440163752, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1009844203}
-    - target: {fileID: 551817451440163752, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBack
-      objectReference: {fileID: 0}
-    - target: {fileID: 551817451440163752, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SettingsMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 846454743885949413, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 846454743885949413, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1631627779642995712, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
       propertyPath: m_Name
       value: UI
@@ -695,91 +596,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3739903852240325928, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752445976933228442, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1009844203}
-    - target: {fileID: 4752445976933228442, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnApply
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752445976933228442, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SettingsMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5030185739952587550, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: menuControls
-      value: 
-      objectReference: {fileID: 1036521970}
-    - target: {fileID: 5030185739952587550, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: settingsMenu
-      value: 
-      objectReference: {fileID: 1036521971}
-    - target: {fileID: 7535788639928737579, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060824697468514838, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 448101297}
-    - target: {fileID: 8060824697468514838, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: settings
-      objectReference: {fileID: 0}
-    - target: {fileID: 8903949462391855167, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2805237610746144024, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1009844201}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
---- !u!1 &1036521970 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9085441240507190461, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1036521971 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8903949462391855167, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1036521972 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2805237610746144024, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1036521973 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5892264979884713016, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1036521974 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2234970171479388707, guid: 128f29a66e19d374582c3d4dcfaee1ac, type: 3}
-  m_PrefabInstance: {fileID: 1036521969}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1302266504
 PrefabInstance:
   m_ObjectHideFlags: 0
