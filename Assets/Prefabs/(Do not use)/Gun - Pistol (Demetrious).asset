@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2bb8f02e4c872a4b8aad982e9dc2e02, type: 3}
-  m_Name: Gun - Rifle
+  m_Name: Gun - Pistol (Demetrious)
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  shootDamage: 10
-  shootDistance: 1500
-  shootRate: 0.5
+  model: {fileID: 100000, guid: 7d06582fc8e311644a92e6d9e9cab273, type: 3}
+  shootDamage: 1
+  shootDistance: 50
+  shootRate: 0.25
   ammoCurr: 0
-  ammoMax: 25
-  hitEffect: {fileID: 0}
+  ammoMax: 60
+  hitEffect: {fileID: 970440554703164915, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   shootSounds: []
   shootVol: 0.5
