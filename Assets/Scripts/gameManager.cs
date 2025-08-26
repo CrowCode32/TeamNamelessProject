@@ -10,11 +10,14 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuControls;
     [SerializeField] GameObject settingsMenu;
 
     [SerializeField] TMP_Text gameGoalCountText;
 
     public Image playerHPBar;
+    public Image shieldBar;
+    public Image shieldCharge;
     public GameObject playerDmgScreen;
     public GameObject playerHealScreen;
 
@@ -35,6 +38,11 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerMovement>();
+
+        menuActive = menuControls;
+        menuActive.SetActive(true);
+        statePause();
+       
     }
 
     // Update is called once per frame
@@ -47,7 +55,7 @@ public class gameManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
-            } else if(menuActive == menuPause)
+            } else if(menuActive == menuPause || menuActive == menuControls)
             {
                 stateUnpause();
             }
@@ -101,6 +109,10 @@ public class gameManager : MonoBehaviour
 
         settingsMenu.SetActive(true);
         menuActive = settingsMenu;
+
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void backToPause()

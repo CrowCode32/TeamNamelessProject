@@ -16,6 +16,11 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
+    public void settings()
+    {
+        gameManager.instance.settings();
+    }
+
     public void quit()
     {
 

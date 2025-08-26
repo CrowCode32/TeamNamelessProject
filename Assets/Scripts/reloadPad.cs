@@ -1,0 +1,52 @@
+using System.Collections;
+using UnityEngine;
+
+public class reloadPad : MonoBehaviour
+{
+
+    [SerializeField] float reloadRate;
+    [SerializeField] int ammoAmount;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        IReload ammo = other.GetComponent<IReload>();
+
+        if (other.isTrigger)
+            return;
+
+        if (ammo !=null)
+        {
+            StartCoroutine(ReloadAmmo(ammo));
+        }
+    }
+
+    IEnumerator ReloadAmmo(IReload ammo)
+    {
+        ammo.reloadAmmo(ammoAmount);
+        yield return new WaitForSeconds(reloadRate);
+    }
+
+    /*IReload(add to PlayerMovement)
+     * 
+     * public void reloadAmmo(int amount)
+    {
+        if (gunList[gunListPos].ammoCur < gunList[gunListPos].ammoMax)
+        {
+            gunList[gunListPos].ammoCur += amount;
+        }
+         UpdatePlayerUI(); //Need to make an ammo bar and then make sure this method differentiates/make new method.
+    } */
+
+
+}
