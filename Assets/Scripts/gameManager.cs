@@ -107,12 +107,9 @@ public class gameManager : MonoBehaviour
         if (menuActive != null)
             menuActive.SetActive(false);
 
-        settingsMenu.SetActive(true);
+       
         menuActive = settingsMenu;
-
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        menuActive.SetActive(true);
     }
 
     public void backToPause()
