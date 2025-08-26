@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu]
 
-public class GunStats : ScriptableObject
+public class gunStats : ScriptableObject
 {
     public GameObject model;
 
@@ -10,7 +10,7 @@ public class GunStats : ScriptableObject
    [Range(5,1500)] public int shootDistance;
    [Range(0.1f,3)] public float shootRate;
 
-    public int ammoCurr;
+   public int ammoCur;
 
    [Range(5,60)] public int ammoMax;
 

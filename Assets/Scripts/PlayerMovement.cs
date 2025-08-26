@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal
     [SerializeField] int shootDmg;
     [SerializeField] float shootRate;
     [SerializeField] int shootDistance;
+    int ammoCur;
 
     //Health
     [SerializeField] int Hp;
