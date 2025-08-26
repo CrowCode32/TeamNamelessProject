@@ -1,29 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
+using Unity.VisualScripting;
 
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] Slider sensSlider;
     [SerializeField] TMP_Text sensLabel;
-    [SerializeField] cameraController cam;
-    [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject settingsMenu;
-
     float origSens;
+    Camera main;
 
-    private void OnEnable()
+    private void Awake()
     {
-        origSens = cam.GetSensitivity();
-
-        sensSlider.SetValueWithoutNotify(origSens);
-        UpdateLabel(origSens);
+        main = Camera.main;
+        origSens = main.GetComponent<cameraController>().sens;
+        sensSlider.onValueChanged.AddListener(delegate { onSliderChange(sensSlider.value); });
     }
 
     // Slider 
     public void onSliderChange(float v)
     {
-        cam.SetSensitivity(v);
+        main.GetComponent<cameraController>().sens = v;
         UpdateLabel(v);
     }
 
@@ -31,16 +29,19 @@ public class SettingsMenu : MonoBehaviour
     public void OnApply()
     {
         origSens = sensSlider.value;
-        settingsMenu.SetActive(false);
-        menuPause.SetActive(true);
+        gameManager.instance.menuActive.SetActive(false);
+        gameManager.instance.menuActive = gameManager.instance.menuPause;
+        gameManager.instance.menuActive.SetActive(true);
     }
 
     // Back or return 
     public void OnBack()
     {
-        cam.SetSensitivity(origSens);
-        settingsMenu.SetActive(false);
-        menuPause.SetActive(true);
+        main.GetComponent<cameraController>().sens = origSens;
+        sensSlider.value = origSens;
+        gameManager.instance.menuActive.SetActive(false);
+        gameManager.instance.menuActive = gameManager.instance.menuPause;
+        gameManager.instance.menuActive.SetActive(true);
     }
 
     // Update
