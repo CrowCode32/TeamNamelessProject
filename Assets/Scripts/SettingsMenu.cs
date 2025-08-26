@@ -48,6 +48,6 @@ public class SettingsMenu : MonoBehaviour
     void UpdateLabel(float v)
     {
         if (sensLabel)
-            sensLabel.text = "Sensitivity: {v:0}"; // Not sure if this is correct or not
+            sensLabel.text = v.ToString();
     }
 }
