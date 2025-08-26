@@ -214,7 +214,7 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator bossIndicatorThree()
     {
         model.material.color = Color.grey;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         model.material.color = colorOrig;
     }
 
@@ -264,9 +264,27 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     IEnumerator bossAttackThree()
     {
-        //Throw Mines everywhere
-        yield return new WaitForSeconds(2f);
+        GameObject storeBullet = bullet;
+        int storeFOV = FOV;
+        bullet = mines;
+        FOV = 0;
+        agent.speed *= 5;
 
+        //Leave Mines everywhere!
+        for (int i = 0; i <10; i++)
+        {
+            roam();
+            yield return new WaitForSeconds(.25f);
+            shoot();
+            yield return new WaitForSeconds(.25f);
+            shoot();
+        }
+      
+        
+
+        FOV = storeFOV;
+        bullet = storeBullet;
+        agent.speed /= 5;
     }
     IEnumerator bossAttackFour()
     {

@@ -358,8 +358,8 @@ MonoBehaviour:
   HP: 50
   faceTargetSpeed: 8
   FOV: 120
-  roamDistance: 5
-  roamPauseTime: 5
+  roamDistance: 20
+  roamPauseTime: 1
   animSpeedTrans: 0
   bullet: {fileID: 3419981150564927128, guid: 56fe3f5dd0d9ee045b8506d428ff67a5, type: 3}
   shootRate: 3
@@ -368,7 +368,7 @@ MonoBehaviour:
   IsBoss: 1
   laserBeam: {fileID: 8533939016176523670}
   shockwave: {fileID: 2206210543093325653}
-  mines: {fileID: 0}
+  mines: {fileID: 2272381311324195110, guid: a44bb54dbad441445beb1eae8a2e545e, type: 3}
 --- !u!195 &235540495150209889
 NavMeshAgent:
   m_ObjectHideFlags: 0
