@@ -1,63 +1,52 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
     [SerializeField] LayerMask ignoreLayer;
 
-    // Speed
+    // Movement
     [SerializeField] CharacterController controller;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
 
     // Jump
     [SerializeField] int jumpSpeed;
-    [SerializeField] int JumpMax;
+    [SerializeField] int jumpMax;
     [SerializeField] int gravity;
 
-    //shoot
+    // Shooting
     [SerializeField] int shootDmg;
     [SerializeField] float shootRte;
     [SerializeField] int shootDist;
 
-    //Health
-    [SerializeField] int Hp;
-
+    // Health
+    [SerializeField] int hp;
     [SerializeField] GameObject shield;
-    
 
     Vector3 moveDir;
     Vector3 playerVel;
-
     float shootTimer;
-
     int jumpCount;
-    int HpOriginal;
-    int CurrentHp;
-
-    // Used for later on
+    int hpOriginal;
+    int currentHp;
     bool isSprinting;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HpOriginal = Hp;
-
+        hpOriginal = hp;
+        currentHp = hp;
         UpdatePlayerUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
-
-        movement();
-        sprint();
-            
+        HandleMovement();
+        HandleSprint();
     }
 
-    void movement()
+    void HandleMovement()
     {
         shootTimer += Time.deltaTime;
 
@@ -75,42 +64,39 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
                   (Input.GetAxis("Vertical") * transform.forward);
 
         controller.Move(moveDir * speed * Time.deltaTime);
-
-        jump();
-
+        HandleJump();
         controller.Move(playerVel * Time.deltaTime);
-        playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRte)
         {
-            shoot();
+            HandleShoot();
         }
     }
 
-    void jump()
+    void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < JumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
         }
     }
 
-    void sprint()
+    void HandleSprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
-            speed *= sprintMod;
-            isSprinting = true;
+            speed *= sprintMod;         // Increase speed
+            isSprinting = true;         // Flag sprinting
         }
         else if (Input.GetButtonUp("Sprint"))
         {
-            speed /= sprintMod;
-            isSprinting = false;
+            speed /= sprintMod;         // Revert speed
+            isSprinting = false;        // Clear sprint flag
         }
     }
 
-    void shoot()
+    void HandleShoot()
     {
         shootTimer = 0;
 
@@ -120,29 +106,26 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
             Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if(dmg != null)
+            if (dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
-   
-
-    public void UpdatePlayerUI() 
+    public void UpdatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
+        gameManager.instance.playerHPBar.fillAmount = (float)hp / hpOriginal;
     }
 
-    IEnumerator flashDmgScreen()
+    IEnumerator FlashDamageScreen()
     {
         gameManager.instance.playerDmgScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDmgScreen.SetActive(false);
     }
 
-    IEnumerator flashHealScreen()
+    IEnumerator FlashHealScreen()
     {
         gameManager.instance.playerHealScreen.SetActive(true);
         yield return new WaitForSeconds(0.2f);
@@ -151,41 +134,47 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
     public void takeDamage(int amount)
     {
-         
-        Hp -= amount;
-
+        hp -= amount;
         UpdatePlayerUI();
-        StartCoroutine(flashDmgScreen());
+        StartCoroutine(FlashDamageScreen());
 
-        if (Hp <= 0)
+        if (hp <= 0)
         {
             gameManager.instance.youLose();
         }
-    
-}
+    }
 
     public void heal(int amount)
     {
-        Hp += amount;
-
+        hp += amount;
         UpdatePlayerUI();
-        StartCoroutine(flashHealScreen());
-        StopHeal(HpOriginal);
-
+        StartCoroutine(FlashHealScreen());
+        StopHeal();
     }
 
-    public void StopHeal(int HpOriginal)
+    public void StopHeal()
     {
-       if (CurrentHp <= HpOriginal)
+        if (hp > hpOriginal)
         {
-            CurrentHp = Hp;
+            hp = hpOriginal;
+            UpdatePlayerUI();
         }
     }
 
     public void GetHealthStats(HealthPackStats health)
     {
-        Hp += health.healthAmount;
-
+        hp += health.healthAmount;
         UpdatePlayerUI();
+        StopHeal();
+    }
+
+    // ✅ IPickup interface implementation
+    public void getGunStats(gunStats gunStats)
+    {
+        shootDmg = gunStats.damage;
+        shootRte = gunStats.fireRate;
+        shootDist = gunStats.range;
+
+        Debug.Log($"Gun stats applied: Damage={shootDmg}, Rate={shootRte}, Range={shootDist}");
     }
 }
