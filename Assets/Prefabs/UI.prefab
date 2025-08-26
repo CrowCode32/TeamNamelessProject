@@ -4416,10 +4416,7 @@ MonoBehaviour:
     Shift - Sprint
 
 
-    R - Reload
-
-
-    ? - Shield
+    Q - Shield
 
 '
   m_isRightToLeft: 0
