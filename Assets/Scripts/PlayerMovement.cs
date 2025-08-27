@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] int gravity;
 
     //shoot
+    [SerializeField] List<gunStats> gunList;
+    [SerializeField] GameObject gunModel;
     [SerializeField] int shootDmg;
     [SerializeField] float shootRte;
     [SerializeField] int shootDist;
@@ -38,6 +41,9 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
     // Used for later on
     bool isSprinting;
+
+    //Gun container
+    int gunListPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -114,10 +120,16 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     {
         shootTimer = 0;
 
+        if (gunList.Count == 0) return; 
+
+        gunStats currentGun = gunList[gunListPos];
+
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
+
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
@@ -126,6 +138,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
                 dmg.takeDamage(shootDmg);
             }
         }
+        gunList[gunListPos].ammoCur--;
     }
 
    
@@ -187,5 +200,18 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         Hp += health.healthAmount;
 
         UpdatePlayerUI();
+    }
+
+    public void GetGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+
+        shootDmg = gun.shootDamage;
+        shootDist = gun.shootDistance;
+        shootRte = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+        gunListPos = gunList.Count - 1;
     }
 }
