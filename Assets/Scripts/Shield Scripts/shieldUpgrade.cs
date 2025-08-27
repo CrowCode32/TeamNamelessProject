@@ -21,7 +21,6 @@ public class shieldUpgrade : MonoBehaviour, IDamage
             shieldDurability = maxDurability;
             shield.enabled = true;
             shieldCharged = false;
-            Debug.Log("Shield bar on");
             gameManager.instance.shieldBar.enabled = true;
             gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         } 
@@ -29,7 +28,6 @@ public class shieldUpgrade : MonoBehaviour, IDamage
         if(shieldDurability <= 0)
         {
             shield.enabled = false;
-            Debug.Log("Shield bar off");
             gameManager.instance.shieldBar.enabled = false;
         }
         
