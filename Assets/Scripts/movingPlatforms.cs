@@ -5,6 +5,7 @@ public class movingPlatform : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] Transform destination;
     [SerializeField] Transform platform;
+    [SerializeField] Transform initialPosition;
 
     Vector3 startingPos;
 
@@ -17,5 +18,11 @@ public class movingPlatform : MonoBehaviour
     void Update()
     {
         platform.transform.position = Vector3.MoveTowards(platform.position, destination.position, speed * Time.deltaTime);
+
+        if(platform.position == destination.position)
+        {
+            destination.position = startingPos;
+            startingPos = platform.position;
+        }
     }
 }
