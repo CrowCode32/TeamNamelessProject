@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8655622667506500878}
-  - component: {fileID: 7313132444559061670}
+  - component: {fileID: 5923704457571168029}
   - component: {fileID: 3262102834452398454}
   - component: {fileID: 9068917505068792143}
   - component: {fileID: 7832011985919828782}
@@ -182,7 +182,7 @@ Transform:
   - {fileID: 2983184761104698839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7313132444559061670
+--- !u!114 &5923704457571168029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,16 +191,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6037966723148322078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba997fbf2f176c14093412115dc54737, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c9d0d6411e569f4796a7834a604ab2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 7832011985919828782}
   agent: {fileID: 3262102834452398454}
-  HP: 2
-  faceTargetSpeed: 8
+  anim: {fileID: 0}
+  HP: 0
+  faceTargetSpeed: 0
+  FOV: 0
+  roamDistance: 0
+  roamPauseTime: 0
+  animSpeedTrans: 0
   bullet: {fileID: 2020913039664651646, guid: 17293044a3bbce647bb15681e4dcd6fc, type: 3}
-  shootRate: 1
-  shootPos: {fileID: 2983184761104698839}
+  shootRate: 0
+  bossAttackRate: 0
+  shootPos: {fileID: 0}
+  IsBoss: 0
+  laserBeam: {fileID: 0}
+  shockwave: {fileID: 0}
+  mines: {fileID: 0}
 --- !u!195 &3262102834452398454
 NavMeshAgent:
   m_ObjectHideFlags: 0

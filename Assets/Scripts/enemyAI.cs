@@ -271,7 +271,7 @@ public class enemyAI : MonoBehaviour, IDamage
         agent.speed *= 5;
 
         //Leave Mines everywhere!
-        for (int i = 0; i <10; i++)
+        for (int i = 0; i < 10; i++)
         {
             roam();
             yield return new WaitForSeconds(.25f);
@@ -279,8 +279,8 @@ public class enemyAI : MonoBehaviour, IDamage
             yield return new WaitForSeconds(.25f);
             shoot();
         }
-      
-        
+
+
 
         FOV = storeFOV;
         bullet = storeBullet;
