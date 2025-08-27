@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IReload
 {
     [SerializeField] LayerMask ignoreLayer;
 
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
     [SerializeField] int Hp;
 
     [SerializeField] GameObject shield;
-    
+
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
     void Start()
     {
         HpOriginal = Hp;
-
-        spawnPlayer();
+        gameManager.instance.playerAmmoBar.fillAmount = 0;
+       spawnPlayer();
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
 
         movement();
         sprint();
-            
+
     }
 
     void movement()
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRte)
-            
+
             shoot();
         selectGun();
     }
@@ -126,24 +126,44 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
     void shoot()
     {
         shootTimer = 0;
+        gunList[gunListPos].ammoCur--;
+        UpdatePlayerAmmoBar();
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
+
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if(dmg != null)
+            if (dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
-    public void UpdatePlayerUI() 
+     public void reloadAmmo(int amount)
+    {
+       
+        if (gunList[gunListPos].ammoCur < gunList[gunListPos].ammoMax)
+        {
+            gunList[gunListPos].ammoCur += amount;
+            UpdatePlayerAmmoBar();
+        }
+          //Need to make an ammo bar and then make sure this method differentiates/make new method.
+    } 
+
+    public void UpdatePlayerHPBar()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
+    }
+
+    public void UpdatePlayerAmmoBar()
+    {
+        gameManager.instance.playerAmmoBar.fillAmount = (float)gunList[gunListPos].ammoCur/gunList[gunListPos].ammoMax;
     }
 
     IEnumerator flashDmgScreen()
@@ -161,30 +181,30 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
     }
 
     public void takeDamage(int amount)
-    { 
+    {
         Hp -= amount;
 
-        UpdatePlayerUI();
+        UpdatePlayerHPBar();
         StartCoroutine(flashDmgScreen());
 
         if (Hp <= 0)
         {
             gameManager.instance.youLose();
         }
-}
+    }
 
     public void heal(int amount)
     {
         Hp += amount;
 
-        UpdatePlayerUI();
+        UpdatePlayerHPBar();
         StartCoroutine(flashHealScreen());
         StopHeal(HpOriginal);
     }
 
     public void StopHeal(int HpOriginal)
     {
-       if (CurrentHp <= HpOriginal)
+        if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
         }
@@ -194,15 +214,16 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
     {
         Hp += health.healthAmount;
 
-        UpdatePlayerUI();
+        UpdatePlayerHPBar();
     }
 
     public void getGunStats(gunStats gun)
     {
         gunList.Add(gun);
         gunListPos = gunList.Count - 1;
-
+        gameManager.instance.playerAmmoBar.fillAmount = 1;
         changeGun();
+        
     }
 
     void changeGun()
@@ -213,6 +234,9 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+        
+
+
     }
 
     void selectGun()
@@ -221,11 +245,13 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
         {
             gunListPos++;
             changeGun();
+            UpdatePlayerAmmoBar();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
         {
             gunListPos--;
             changeGun();
+            UpdatePlayerAmmoBar();
         }
     }
 
@@ -237,6 +263,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups
 
         playerVel = Vector3.zero;
         Hp = HpOriginal;
-        UpdatePlayerUI();
+        UpdatePlayerHPBar();
     }
 }
