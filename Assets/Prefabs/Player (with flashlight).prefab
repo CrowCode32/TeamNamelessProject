@@ -222,7 +222,7 @@ MonoBehaviour:
   shootDmg: 0
   shootRte: 0
   shootDist: 0
-  Hp: 7000000
+  Hp: 2147483647
   shield: {fileID: 2876096859364944524}
 --- !u!33 &5137643247833060424
 MeshFilter:
