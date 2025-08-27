@@ -17,13 +17,19 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] float bossAttackRate;
     [SerializeField] Transform shootPos;
- 
+
+    [SerializeField] bool IsBoss;
+    [SerializeField] GameObject laserBeam;
+    [SerializeField] GameObject shockwave;
+    [SerializeField] GameObject mines;
 
 
     Color colorOrig;
 
     float shootTimer;
+    float bossAttackTimer;
     float angleToPlayer;
     float roamTimer;
     float stoppingDistanceOriginal;
@@ -47,7 +53,9 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         setAnimations();
+
         shootTimer += Time.deltaTime;
+        bossAttackTimer += Time.deltaTime;
 
         if (agent.remainingDistance < 0.01f)
         {
@@ -66,15 +74,15 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void setAnimations()
     {
-        float agentSpeed = agent.velocity.normalized.magnitude;
-        float animSpeedCurr = anim.GetFloat("Speed");
+        float agentSpeedCur = agent.velocity.normalized.magnitude;
+        float animSpeedCur = anim.GetFloat("Speed");
 
-        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr,agentSpeed, Time.deltaTime * animSpeedTrans));
+        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeedCur, Time.deltaTime * animSpeedTrans));
     }
 
     void checkRoam()
     {
-        if(roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
+        if (roamTimer >= roamPauseTime && agent.remainingDistance < 0.01f)
         {
             roam();
         }
@@ -114,6 +122,15 @@ public class enemyAI : MonoBehaviour, IDamage
                 if (shootTimer >= shootRate)
                 {
                     shoot();
+
+                    if (IsBoss)
+                    {
+                        if (bossAttackTimer > bossAttackRate)
+                        {
+                            bossAttacks();
+                        }
+                    }
+
                 }
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -165,8 +182,6 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             HP -= amount;
             StartCoroutine(flashRed());
-
-            agent.SetDestination(gameManager.instance.player.transform.position);
         }
         if (HP <= 0)
         {
@@ -176,9 +191,142 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     IEnumerator flashRed()
     {
+        Color tempColorOrig = model.material.color;
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
+        model.material.color = tempColorOrig;
+    }
+
+    IEnumerator bossIndicator()
+    {
+        model.material.color = Color.purple;
+        yield return new WaitForSeconds(3f);
         model.material.color = colorOrig;
     }
+
+    IEnumerator bossIndicatorTwo()
+    {
+        model.material.color = Color.orange;
+        yield return new WaitForSeconds(3f);
+        model.material.color = colorOrig;
+    }
+
+    IEnumerator bossIndicatorThree()
+    {
+        model.material.color = Color.grey;
+        yield return new WaitForSeconds(5f);
+        model.material.color = colorOrig;
+    }
+
+    IEnumerator bossIndicatorFour()
+    {
+        model.material.color = Color.deepPink;
+        yield return new WaitForSeconds(2f);
+        model.material.color = colorOrig;
+    }
+
+    IEnumerator bossAttackOne()
+    {
+
+        agent.speed = agent.speed * 3;
+        shootRate = shootRate / 5;
+        yield return new WaitForSeconds(3f);
+        agent.speed = agent.speed / 3;
+        shootRate = shootRate * 5;
+    }
+
+    IEnumerator bossAttackTwo()
+    {
+        //Shockwave Attack
+
+        shockwave.transform.localScale = Vector3.zero;
+        shockwave.gameObject.SetActive(true);
+
+
+        float growTime = 2.5f; //Attack stats. Can be changed if needed.
+        float maxScale = 10f;
+        float elapsed = 0f;
+
+        while (elapsed < growTime)  //while elapsed < growTime, expand.
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / growTime;
+
+            shockwave.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * maxScale, t);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(.5f);
+        shockwave.gameObject.SetActive(false);
+
+
+    }
+    IEnumerator bossAttackThree()
+    {
+        GameObject storeBullet = bullet;
+        int storeFOV = FOV;
+        bullet = mines;
+        FOV = 0;
+        agent.speed *= 5;
+
+        //Leave Mines everywhere!
+        for (int i = 0; i <10; i++)
+        {
+            roam();
+            yield return new WaitForSeconds(.25f);
+            shoot();
+            yield return new WaitForSeconds(.25f);
+            shoot();
+        }
+      
+        
+
+        FOV = storeFOV;
+        bullet = storeBullet;
+        agent.speed /= 5;
+    }
+    IEnumerator bossAttackFour()
+    {
+        //Sweeping Laser Beam
+        yield return new WaitForSeconds(1.5f); //Delay for the indicator
+        laserBeam.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        laserBeam.gameObject.SetActive(false);
+
+    }
+
+
+    public void bossAttacks()
+    {
+
+        bossAttackTimer = 0;
+        int attack = Random.Range(1, 5);
+
+
+        if (attack == 1)
+        {
+            StartCoroutine(bossIndicator());
+            StartCoroutine(bossAttackOne());
+
+        }
+        else if (attack == 2)
+        {
+            StartCoroutine(bossIndicatorTwo());
+            StartCoroutine(bossAttackTwo());
+        }
+        else if (attack == 3)
+        {
+            StartCoroutine(bossIndicatorThree());
+            StartCoroutine(bossAttackThree());
+        }
+        else if (attack == 4)
+        {
+            StartCoroutine(bossIndicatorFour());
+            StartCoroutine(bossAttackFour());
+        }
+
+    }
+
 
 }
