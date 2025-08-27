@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     {
         HpOriginal = Hp;
 
-        spawnPlayer();
+        //spawnPlayer();
     }
 
     // Update is called once per frame
@@ -229,7 +229,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-    public void spawnPlayer()
+   /* public void spawnPlayer()
     {
         controller.enabled = false;
         controller.transform.position = gameManager.instance.playerSpawnPos.transform.position;
@@ -238,5 +238,5 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         playerVel = Vector3.zero;
         Hp = HpOriginal;
         UpdatePlayerUI();
-    }
+    }*/
 }

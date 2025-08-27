@@ -216,7 +216,7 @@ MonoBehaviour:
   jumpSpeed: 5
   JumpMax: 1
   gravity: 2
-  gunModel: {fileID: 0}
+  gunModel: {fileID: 8467221989647575078}
   gunList: []
   shootDmg: 0
   shootRte: 0
