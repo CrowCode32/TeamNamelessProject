@@ -2255,7 +2255,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6697365430368367385}
-  - {fileID: 32233551882613415}
   - {fileID: 4840635634064411591}
   - {fileID: 6879781183645386687}
   - {fileID: 7662958573295643261}
@@ -16978,71 +16977,35 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7606893308195230845}
+    m_TransformParent: {fileID: 3258402337764647969}
     m_Modifications:
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Range
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Intensity
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_SpotAngle
-      value: 39.729046
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_Lightmapping
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097175122181037578, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 39.729046
-      objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -74.1747
+      value: -4.054689
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5000067
+      value: 5.4925065
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -100.0346
+      value: 10.358696
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6273357231718677989, guid: b52516d00e1262448b0d26ee8334dc8c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25050,6 +25013,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5949674070858514800, guid: fc844e94185a6cb4791a590fee3c4d19, type: 3}
       insertIndex: 11
       addedObject: {fileID: 3540679371210178311}
+    - targetCorrespondingSourceObject: {fileID: 5949674070858514800, guid: fc844e94185a6cb4791a590fee3c4d19, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 32233551882613415}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc844e94185a6cb4791a590fee3c4d19, type: 3}
 --- !u!4 &3258402337764647969 stripped
