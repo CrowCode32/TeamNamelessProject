@@ -58,7 +58,7 @@ MonoBehaviour:
   roamDistance: 20
   roamPauseTime: 2
   animSpeedTrans: 2
-  mine: {fileID: 4223445563541265411, guid: a44bb54dbad441445beb1eae8a2e545e, type: 3}
+  mine: {fileID: 2272381311324195110, guid: a44bb54dbad441445beb1eae8a2e545e, type: 3}
   shootRate: 0.5
   shootPos: {fileID: 7174009988502770031}
 --- !u!33 &2767050457669492385
