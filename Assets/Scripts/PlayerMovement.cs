@@ -228,4 +228,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
             changeGun();
         }
     }
+
+    public void getGunStats(GunStats gun)
+    {
+       // throw new System.NotImplementedException();
+
+    }
 }
