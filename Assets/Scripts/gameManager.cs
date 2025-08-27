@@ -6,13 +6,16 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject settingsMenu;
 
     [SerializeField] TMP_Text gameGoalCountText;
 
+    public Image playerAmmoBar;
     public Image playerHPBar;
     public Image shieldBar;
     public Image shieldCharge;
@@ -36,6 +39,11 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerMovement>();
+
+        menuActive = menuControls;
+        menuActive.SetActive(true);
+        statePause();
+       
     }
 
     // Update is called once per frame
@@ -48,7 +56,7 @@ public class gameManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
-            } else if(menuActive == menuPause)
+            } else if(menuActive == menuPause || menuActive == menuControls)
             {
                 stateUnpause();
             }
@@ -93,5 +101,23 @@ public class gameManager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void settings()
+    {
+        if (menuActive != null)
+            menuActive.SetActive(false);
+
+       
+        menuActive = settingsMenu;
+        menuActive.SetActive(true);
+    }
+
+    public void backToPause()
+    {
+        settingsMenu.SetActive(false);
+
+        menuPause.SetActive(true);
+        menuActive = menuPause;
     }
 }

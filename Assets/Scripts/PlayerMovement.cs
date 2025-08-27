@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
@@ -16,18 +17,19 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] int JumpMax;
     [SerializeField] int gravity;
 
+    [SerializeField] GameObject gunModel;
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDistance;
+    [SerializeField] float shootRte;
+    [SerializeField] int shootDist;
 
     //Health
     [SerializeField] int Hp;
 
-
-    // Gun
-    [SerializeField] GameObject gunModel;
-    [SerializeField] List<GunStats> gunList = new List<GunStats>();
+    [SerializeField] GameObject shield;
+    
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -53,10 +55,11 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
 
         movement();
         sprint();
+            
     }
 
     void movement()
@@ -83,11 +86,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRte)
+            
             shoot();
-
         selectGun();
-        reload();
     }
 
     void jump()
@@ -113,20 +115,20 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-    void reload()
-    {
-        if (Input.GetButtonDown("Reload"))
-        {
-            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
-        }
-    }
+    //void reload()
+    //{
+    //    if (Input.GetButtonDown("Reload"))
+    //    {
+    //        gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+    //    }
+    //}
 
     void shoot()
     {
         shootTimer = 0;
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
 
@@ -138,8 +140,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
             }
         }
     }
-
-   
 
     public void UpdatePlayerUI() 
     {
@@ -161,8 +161,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     }
 
     public void takeDamage(int amount)
-    {
-         
+    { 
         Hp -= amount;
 
         UpdatePlayerUI();
@@ -172,15 +171,45 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         {
             gameManager.instance.youLose();
         }
-    
 }
 
-    public void changeGun()
+    public void heal(int amount)
     {
+        Hp += amount;
 
+        UpdatePlayerUI();
+        StartCoroutine(flashHealScreen());
+        StopHeal(HpOriginal);
+    }
+
+    public void StopHeal(int HpOriginal)
+    {
+       if (CurrentHp <= HpOriginal)
+        {
+            CurrentHp = Hp;
+        }
+    }
+
+    public void GetHealthStats(HealthPackStats health)
+    {
+        Hp += health.healthAmount;
+
+        UpdatePlayerUI();
+    }
+
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        changeGun();
+    }
+
+    void changeGun()
+    {
         shootDmg = gunList[gunListPos].shootDamage;
-        shootDistance = gunList[gunListPos].shootDistance;
-        shootRate = gunList[gunListPos].shootRate;
+        shootDist = gunList[gunListPos].shootDistance;
+        shootRte = gunList[gunListPos].shootRate;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
@@ -198,35 +227,5 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
             gunListPos--;
             changeGun();
         }
-    }
-
-    public void heal(int amount)
-    {
-        Hp += amount;
-
-        UpdatePlayerUI();
-        StartCoroutine(flashHealScreen());
-        StopHeal(HpOriginal);
-
-    }
-
-    public void StopHeal(int HpOriginal)
-    {
-       if (CurrentHp <= HpOriginal)
-        {
-            CurrentHp = Hp;
-        }
-    }
-
-    public void getGunStats(GunStats gun)
-    {
-        gunList.Add(gun);
-
-        shootDmg = gun.shootDamage;
-        shootDistance = gun.shootDistance;
-        shootRate = gun.shootRate;
-
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

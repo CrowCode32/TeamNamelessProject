@@ -418,23 +418,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3184780831501016979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db16f113d8864084f8caba941abc0687, type: 3}
+  m_Script: {fileID: 11500000, guid: bfccca9aaa1b42f45ae3af5290147e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   controller: {fileID: 2069928826228244167}
-  speed: 5
+  speed: 8
   sprintMod: 2
   jumpSpeed: 5
   JumpMax: 1
-  gravity: 35
-  shootDmg: 1
+  gravity: 2
+  shootDmg: 0
   shootRte: 0
-  shootDist: 15
-  Hp: 20
-  shield: {fileID: 0}
+  shootDist: 0
+  Hp: 30
+  shield: {fileID: 2876096859364944524}
 --- !u!33 &5137643247833060424
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -714,6 +714,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00fb0c8393714034f8668612cfec134c, type: 3}
+--- !u!1 &2876096859364944524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2639806122617014633, guid: 00fb0c8393714034f8668612cfec134c, type: 3}
+  m_PrefabInstance: {fileID: 237436737250223077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4132253773955512273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4184756226263864372, guid: 00fb0c8393714034f8668612cfec134c, type: 3}

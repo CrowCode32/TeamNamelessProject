@@ -1,12 +1,14 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    [SerializeField] int sens;
+    [SerializeField] public float sens = 500f;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
     float rotX;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
