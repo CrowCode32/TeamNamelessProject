@@ -9068,6 +9068,10 @@ PrefabInstance:
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5281581939809610835, guid: b675f9b8968195142994cdc61af71449, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31668,6 +31672,10 @@ PrefabInstance:
     - target: {fileID: 1249061999417528673, guid: 62de7f1ce5ade2a4a8a0b667e562ad28, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420298495729268989, guid: 62de7f1ce5ade2a4a8a0b667e562ad28, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5268161602162820012, guid: 62de7f1ce5ade2a4a8a0b667e562ad28, type: 3}
       propertyPath: m_LocalPosition.x
