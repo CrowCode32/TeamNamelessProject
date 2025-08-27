@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] int Hp;
 
     [SerializeField] GameObject shield;
-    
+
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     {
         HpOriginal = Hp;
 
-        //spawnPlayer();
+        spawnPlayer();
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
         movement();
         sprint();
-            
+
     }
 
     void movement()
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRte)
-            
+
             shoot();
         selectGun();
     }
@@ -137,15 +137,14 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-
-            if(dmg != null)
+            if (dmg != null)
             {
                 dmg.takeDamage(shootDmg);
             }
         }
     }
 
-    public void UpdatePlayerUI() 
+    public void UpdatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)Hp / HpOriginal;
     }
@@ -165,7 +164,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     }
 
     public void takeDamage(int amount)
-    { 
+    {
         Hp -= amount;
 
         UpdatePlayerUI();
@@ -175,7 +174,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         {
             gameManager.instance.youLose();
         }
-}
+    }
 
     public void heal(int amount)
     {
@@ -188,7 +187,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
     public void StopHeal(int HpOriginal)
     {
-       if (CurrentHp <= HpOriginal)
+        if (CurrentHp <= HpOriginal)
         {
             CurrentHp = Hp;
         }
@@ -233,7 +232,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-   /* public void spawnPlayer()
+    public void spawnPlayer()
     {
         controller.enabled = false;
         controller.transform.position = gameManager.instance.playerSpawnPos.transform.position;
@@ -242,5 +241,5 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         playerVel = Vector3.zero;
         Hp = HpOriginal;
         UpdatePlayerUI();
-    }*/
+    }
 }
