@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup, IReload
+public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups, IReload
 {
     [SerializeField] LayerMask ignoreLayer;
 
