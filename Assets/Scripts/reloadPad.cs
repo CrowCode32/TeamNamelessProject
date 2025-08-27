@@ -37,6 +37,7 @@ public class reloadPad : MonoBehaviour
         yield return new WaitForSeconds(reloadRate);
     }
 
+
     /*IReload(add to PlayerMovement)
      * 
      * public void reloadAmmo(int amount)
