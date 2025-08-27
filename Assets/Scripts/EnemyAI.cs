@@ -19,6 +19,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
  
+
+
     Color colorOrig;
 
     float shootTimer;
@@ -45,7 +47,6 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         setAnimations();
-
         shootTimer += Time.deltaTime;
 
         if (agent.remainingDistance < 0.01f)
@@ -65,10 +66,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void setAnimations()
     {
-        float agentSpeedCur = agent.velocity.normalized.magnitude;
-        float animSpeedCur = anim.GetFloat("Speed");
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        float animSpeedCurr = anim.GetFloat("Speed");
 
-        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeedCur, Time.deltaTime * animSpeedTrans));
+        anim.SetFloat("Speed", Mathf.Lerp(animSpeedCurr,agentSpeed, Time.deltaTime * animSpeedTrans));
     }
 
     void checkRoam()
@@ -153,16 +154,19 @@ public class enemyAI : MonoBehaviour, IDamage
         shootTimer = 0;
 
         anim.SetTrigger("Shoot");
-        
+
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
     public void takeDamage(int amount)
     {
+
         if (HP > 0)
         {
             HP -= amount;
             StartCoroutine(flashRed());
+
+            agent.SetDestination(gameManager.instance.player.transform.position);
         }
         if (HP <= 0)
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 {
@@ -18,14 +18,16 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
 
     //shoot
     [SerializeField] int shootDmg;
-    [SerializeField] float shootRte;
-    [SerializeField] int shootDist;
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDistance;
 
     //Health
     [SerializeField] int Hp;
 
-    [SerializeField] GameObject shield;
-    
+
+    // Gun
+    [SerializeField] GameObject gunModel;
+    [SerializeField] List<GunStats> gunList = new List<GunStats>();
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     int jumpCount;
     int HpOriginal;
     int CurrentHp;
+    int gunListPos;
 
     // Used for later on
     bool isSprinting;
@@ -50,11 +53,10 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.green);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
 
         movement();
         sprint();
-            
     }
 
     void movement()
@@ -81,10 +83,11 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRte)
-        {
+        if (Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCurr > 0 && shootTimer >= shootRate)
             shoot();
-        }
+
+        selectGun();
+        reload();
     }
 
     void jump()
@@ -110,12 +113,20 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
+    void reload()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            gunList[gunListPos].ammoCurr = gunList[gunListPos].ammoMax;
+        }
+    }
+
     void shoot()
     {
         shootTimer = 0;
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
 
@@ -164,6 +175,31 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     
 }
 
+    public void changeGun()
+    {
+
+        shootDmg = gunList[gunListPos].shootDamage;
+        shootDistance = gunList[gunListPos].shootDistance;
+        shootRate = gunList[gunListPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
+
     public void heal(int amount)
     {
         Hp += amount;
@@ -182,10 +218,15 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
         }
     }
 
-    public void GetHealthStats(HealthPackStats health)
+    public void getGunStats(GunStats gun)
     {
-        Hp += health.healthAmount;
+        gunList.Add(gun);
 
-        UpdatePlayerUI();
+        shootDmg = gun.shootDamage;
+        shootDistance = gun.shootDistance;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

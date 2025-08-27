@@ -8,7 +8,7 @@ public class Pickups : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        IPickup pickupable = other.GetComponent<IPickup>();
+        IPickups pickupable = other.GetComponent<IPickups>();
 
         if(pickupable != null )
         {
