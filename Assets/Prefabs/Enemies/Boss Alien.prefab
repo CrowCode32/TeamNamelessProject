@@ -355,7 +355,7 @@ MonoBehaviour:
   model: {fileID: 3827203239076122112}
   agent: {fileID: 235540495150209889}
   anim: {fileID: 1057277448483494423}
-  HP: 50
+  HP: 100
   faceTargetSpeed: 8
   FOV: 120
   roamDistance: 20

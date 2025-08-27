@@ -126,13 +126,17 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickup
     void shoot()
     {
         shootTimer = 0;
+        gunList[gunListPos].ammoCur--;
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
+
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
+
 
             if(dmg != null)
             {
