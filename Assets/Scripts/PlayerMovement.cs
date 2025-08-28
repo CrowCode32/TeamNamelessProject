@@ -183,7 +183,6 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups, IReload
 
     public void takeDamage(int amount)
     {
-        Debug.Log(amount);
         Hp -= amount;
 
         UpdatePlayerHPBar();
