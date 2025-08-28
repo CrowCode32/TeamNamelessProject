@@ -6,14 +6,14 @@ public class enemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animator anim;
+    //[SerializeField] Animator anim;
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
     [SerializeField] int roamDistance;
     [SerializeField] int roamPauseTime;
-    [SerializeField] int animSpeedTrans;
+    //[SerializeField] int animSpeedTrans;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -52,7 +52,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        setAnimations();
+        //setAnimations();
 
         shootTimer += Time.deltaTime;
         bossAttackTimer += Time.deltaTime;
@@ -72,13 +72,13 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    void setAnimations()
+    /*void setAnimations()
     {
         float agentSpeedCur = agent.velocity.normalized.magnitude;
         float animSpeedCur = anim.GetFloat("Speed");
 
         anim.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeedCur, Time.deltaTime * animSpeedTrans));
-    }
+    }*/
 
     void checkRoam()
     {
@@ -114,7 +114,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
 
             //Can See You!!
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
+            if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Shield") && angleToPlayer <= FOV)
             {
 
                 agent.SetDestination(gameManager.instance.player.transform.position);
@@ -152,7 +152,7 @@ public class enemyAI : MonoBehaviour, IDamage
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             playerInTrigger = true;
         }
@@ -170,7 +170,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         shootTimer = 0;
 
-        anim.SetTrigger("Shoot");
+        //anim.SetTrigger("Shoot");
 
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
@@ -275,7 +275,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             roam();
             yield return new WaitForSeconds(.25f);
-            shoot();
+            //shoot();
             yield return new WaitForSeconds(.25f);
             shoot();
         }
