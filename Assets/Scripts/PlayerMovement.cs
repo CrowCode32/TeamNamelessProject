@@ -150,6 +150,7 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups, IReload
        
         if (gunList[gunListPos].ammoCur < gunList[gunListPos].ammoMax)
         {
+            Debug.Log(amount);
             gunList[gunListPos].ammoCur += amount;
             UpdatePlayerAmmoBar();
         }
@@ -195,11 +196,13 @@ public class PlayerMovement : MonoBehaviour, IDamage, IHeal, IPickups, IReload
 
     public void heal(int amount)
     {
-        Hp += amount;
-
-        UpdatePlayerHPBar();
-        StartCoroutine(flashHealScreen());
-        StopHeal(HpOriginal);
+        if(Hp < HpOriginal)
+        {
+            Hp += amount;
+            UpdatePlayerHPBar();
+            StartCoroutine(flashHealScreen());
+        }
+        //StopHeal(HpOriginal);
     }
 
     public void StopHeal(int HpOriginal)

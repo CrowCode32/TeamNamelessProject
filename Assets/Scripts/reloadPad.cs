@@ -23,7 +23,7 @@ public class reloadPad : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Reloading!");
+        //Debug.Log("Reloading!");
         IReload ammo = other.GetComponent<IReload>();
 
         if (other.isTrigger)
@@ -41,7 +41,7 @@ public class reloadPad : MonoBehaviour
 
     IEnumerator ReloadAmmo(IReload ammo)
     {
-        isReloading = true; 
+        isReloading = true;
         ammo.reloadAmmo(ammoAmount);
         yield return new WaitForSeconds(reloadRate);
         isReloading=false;
