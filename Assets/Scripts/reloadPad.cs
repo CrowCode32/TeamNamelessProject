@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class reloadPad : MonoBehaviour
 {
+    [SerializeField] Rigidbody Rb;
 
     [SerializeField] float reloadRate;
     [SerializeField] int ammoAmount;
+
+    bool isReloading;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +23,7 @@ public class reloadPad : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Debug.Log("Reloading!");
         IReload ammo = other.GetComponent<IReload>();
 
         if (other.isTrigger)
@@ -27,26 +31,22 @@ public class reloadPad : MonoBehaviour
 
         if (ammo !=null)
         {
-            StartCoroutine(ReloadAmmo(ammo));
+            if(!isReloading)
+            {
+                StartCoroutine(ReloadAmmo(ammo));
+            }
+            
         }
     }
 
     IEnumerator ReloadAmmo(IReload ammo)
     {
+        isReloading = true;
         ammo.reloadAmmo(ammoAmount);
         yield return new WaitForSeconds(reloadRate);
+        isReloading=false;
     }
 
-    /*IReload(add to PlayerMovement)
-     * 
-     * public void reloadAmmo(int amount)
-    {
-        if (gunList[gunListPos].ammoCur < gunList[gunListPos].ammoMax)
-        {
-            gunList[gunListPos].ammoCur += amount;
-        }
-         UpdatePlayerUI(); //Need to make an ammo bar and then make sure this method differentiates/make new method.
-    } */
 
 
 }

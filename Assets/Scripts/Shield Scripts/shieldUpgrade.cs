@@ -25,7 +25,7 @@ public class shieldUpgrade : MonoBehaviour, IDamage
             gameManager.instance.shieldCharge.fillAmount = shieldCharged ? 1 : 0;
         } 
 
-        if(shieldDurability == 0)
+        if(shieldDurability <= 0)
         {
             shield.enabled = false;
             gameManager.instance.shieldBar.enabled = false;

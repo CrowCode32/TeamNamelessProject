@@ -9,11 +9,11 @@ public class Pickups : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IPickup pickupable = other.GetComponent<IPickup>();
+        IPickups pickupable = other.GetComponent<IPickups>();
 
         if (pickupable != null)
         {
-           // pickupable.getGunStats(gun);
+            pickupable.getGunStats(gun);
             gun.ammoCur = gun.ammoMax;
             Destroy(gameObject);
         }

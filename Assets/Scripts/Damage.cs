@@ -42,8 +42,8 @@ public class Damage : MonoBehaviour
 
         if (other.isTrigger)
             return;
-        
-        if(dmg != null)
+
+        if (dmg != null)
         {
             if(type != DamageType.DOT)
             {

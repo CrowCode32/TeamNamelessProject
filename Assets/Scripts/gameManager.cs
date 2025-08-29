@@ -24,6 +24,8 @@ public class gameManager : MonoBehaviour
 
     public GameObject player;
     public PlayerMovement playerScript;
+    public GameObject playerSpawnPos;
+    public GameObject checkpointPopup;
 
     public bool isPaused;
 
@@ -43,7 +45,8 @@ public class gameManager : MonoBehaviour
         menuActive = menuControls;
         menuActive.SetActive(true);
         statePause();
-       
+
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
